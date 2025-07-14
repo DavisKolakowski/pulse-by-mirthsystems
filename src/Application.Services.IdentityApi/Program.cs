@@ -1,10 +1,9 @@
 
-namespace Application.Services.Identity.API;
+namespace Application.Services.IdentityApi;
 
 using Application.Domain.Entities;
 using Application.Infrastructure.Data.Context;
 
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 public class Program

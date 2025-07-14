@@ -12,19 +12,19 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["src/Application.Services.Identity.API/Application.Services.Identity.API.csproj", "src/Application.Services.Identity.API/"]
-RUN dotnet restore "./src/Application.Services.Identity.API/Application.Services.Identity.API.csproj"
+COPY ["src/Application.Services.IdentityApi/Application.Services.IdentityApi.csproj", "src/Application.Services.IdentityApi/"]
+RUN dotnet restore "./src/Application.Services.IdentityApi/Application.Services.IdentityApi.csproj"
 COPY . .
-WORKDIR "/src/src/Application.Services.Identity.API"
-RUN dotnet build "./Application.Services.Identity.API.csproj" -c $BUILD_CONFIGURATION -o /app/build
+WORKDIR "/src/src/Application.Services.IdentityApi"
+RUN dotnet build "./Application.Services.IdentityApi.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 # This stage is used to publish the service project to be copied to the final stage
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./Application.Services.Identity.API.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "./Application.Services.IdentityApi.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 # This stage is used in production or when running from VS in regular mode (Default when not using the Debug configuration)
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Application.Services.Identity.API.dll"]
+ENTRYPOINT ["dotnet", "Application.Services.IdentityApi.dll"]
