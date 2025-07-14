@@ -9,13 +9,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.AppHost", "src\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.ServiceDefaults", "src\Application.ServiceDefaults\Application.ServiceDefaults.csproj", "{53049761-FDE2-6E8F-2404-FE1FAEB0A930}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Services.WeatherApi", "src\Application.Services.WeatherApi\Application.Services.WeatherApi.csproj", "{3905C209-B6A3-CAC8-FE0E-C25DB4114800}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Web", "src\Application.Web\Application.Web.csproj", "{183F4A53-B02E-E870-ACCF-4C6C5CD5E32B}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.IntegrationTests", "src\Application.IntegrationTests\Application.IntegrationTests.csproj", "{BC10B978-9CA4-6935-C501-8DD3B1F9BAEB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Services.DatabaseMigrations", "src\Application.Services.DatabaseMigrations\Application.Services.DatabaseMigrations.csproj", "{400F4D89-A5CE-4272-941F-E53A3973F02D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Services.Identity.API", "src\Application.Services.Identity.API\Application.Services.Identity.API.csproj", "{50F2BAC0-B9EE-4B44-95F5-F4636E1C5FD8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,14 +33,6 @@ Global
 		{53049761-FDE2-6E8F-2404-FE1FAEB0A930}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53049761-FDE2-6E8F-2404-FE1FAEB0A930}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53049761-FDE2-6E8F-2404-FE1FAEB0A930}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3905C209-B6A3-CAC8-FE0E-C25DB4114800}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3905C209-B6A3-CAC8-FE0E-C25DB4114800}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3905C209-B6A3-CAC8-FE0E-C25DB4114800}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3905C209-B6A3-CAC8-FE0E-C25DB4114800}.Release|Any CPU.Build.0 = Release|Any CPU
-		{183F4A53-B02E-E870-ACCF-4C6C5CD5E32B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{183F4A53-B02E-E870-ACCF-4C6C5CD5E32B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{183F4A53-B02E-E870-ACCF-4C6C5CD5E32B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{183F4A53-B02E-E870-ACCF-4C6C5CD5E32B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BC10B978-9CA4-6935-C501-8DD3B1F9BAEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BC10B978-9CA4-6935-C501-8DD3B1F9BAEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC10B978-9CA4-6935-C501-8DD3B1F9BAEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -51,6 +41,10 @@ Global
 		{400F4D89-A5CE-4272-941F-E53A3973F02D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{400F4D89-A5CE-4272-941F-E53A3973F02D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{400F4D89-A5CE-4272-941F-E53A3973F02D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50F2BAC0-B9EE-4B44-95F5-F4636E1C5FD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50F2BAC0-B9EE-4B44-95F5-F4636E1C5FD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50F2BAC0-B9EE-4B44-95F5-F4636E1C5FD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50F2BAC0-B9EE-4B44-95F5-F4636E1C5FD8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

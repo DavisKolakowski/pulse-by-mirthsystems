@@ -10,7 +10,7 @@ public class Program
     {
         var builder = Host.CreateApplicationBuilder(args);
         builder.AddServiceDefaults();
-        builder.AddNpgsqlDbContext<ApplicationDbContext>("application-db", configureDbContextOptions: options =>
+        builder.AddAzureNpgsqlDbContext<ApplicationDbContext>("application-db", configureDbContextOptions: options =>
         {
             options.UseNpgsql(npgsqlOptions =>
             {
