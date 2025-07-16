@@ -19,6 +19,7 @@ public sealed class ApplicationDbContext : DbContext
     public DbSet<SpecialMenuScheduleEntity> SpecialMenuSchedules => Set<SpecialMenuScheduleEntity>();
 
     // Venue Authorization entities
+    public DbSet<UserEntity> Users => Set<UserEntity>();
     public DbSet<VenueRoleEntity> VenueRoles => Set<VenueRoleEntity>();
     public DbSet<VenueUserRoleEntity> VenueUserRoles => Set<VenueUserRoleEntity>();
     public DbSet<VenueInvitationEntity> VenueInvitations => Set<VenueInvitationEntity>();

@@ -70,6 +70,19 @@ public static class ServiceCollectionExtensions
         return services;
     }
 
+    public static IServiceCollection AddApplicationAuthorization(this IServiceCollection services)
+    {
+        services.AddAuthorization(options =>
+        {
+            options.AddPolicy("system-admin", policy =>
+                              policy.RequireClaim("permissions", "system:admin"));
+            options.AddPolicy("content-manager", policy =>
+                              policy.RequireClaim("permissions", "content:manager"));
+        });
+
+        return services;
+    }
+
     private static void RegisterRepositories(IServiceCollection services)
     {
         // Register specific repositories with their interfaces

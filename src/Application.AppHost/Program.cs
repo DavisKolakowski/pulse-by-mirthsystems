@@ -5,23 +5,19 @@ internal class Program
         var builder = DistributedApplication.CreateBuilder(args);
 
         var azureMapsSubscriptionKey = builder.AddParameter("azure-maps-subscription-key", secret: true);
-        var keycloakAdminUsername = builder.AddParameter("keycloak-admin-username");
-        var keycloakAdminPassword = builder.AddParameter("keycloak-admin-password", secret: true);
-
-        var keycloak = 
-            builder.AddKeycloak("keycloak", 8080, keycloakAdminUsername, keycloakAdminPassword)
-                   .WithDataVolume(name: "keycloak-data");
+        var postgresAdminUsername = builder.AddParameter("postgres-admin-username");
+        var postgresAdminPassword = builder.AddParameter("postgres-admin-password", secret: true);
 
         var postgres =
             builder.AddAzurePostgresFlexibleServer("postgres")
+                   .WithPasswordAuthentication(postgresAdminUsername, postgresAdminPassword)
                    .RunAsContainer(container =>
                    {
                        container.WithImage("postgis/postgis");
-                       container.WithDataVolume(
-                           name: "postgres-data",
+                       container.WithDataBindMount(
+                           source: "../../data/postgres",
                            isReadOnly: false
-                       )
-                       .WithPgWeb();
+                       ).WithPgWeb();                   
                    });
 
         var cache = builder.AddRedis("cache");

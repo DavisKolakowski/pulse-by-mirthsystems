@@ -1,6 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
+using Application.Domain.Extensions;
+
 using NodaTime;
 
 namespace Application.Domain.Entities;
@@ -33,13 +35,9 @@ public class SpecialMenuScheduleEntity
     [Column("is_active")]
     public bool IsActive { get; set; } = true;
 
-    [Column("is_recurring")]
-    public bool IsRecurring { get; set; } = true;
-
-    [Column("recurrence_pattern")]
+    [Column("recurrence_pattern", TypeName = "jsonb")]
     [Required]
-    [MaxLength(100)]
-    public string RecurrencePattern { get; set; } = null!; // e.g., "0 16 * * 1-4" for 4:00 PM Mon-Thu
+    public RecurrencePattern RecurrencePattern { get; set; } = null!;
 
     public SpecialMenuEntity SpecialMenu { get; set; } = null!;
 }
