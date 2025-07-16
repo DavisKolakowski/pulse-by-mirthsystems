@@ -13,8 +13,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Application.Services.DatabaseMigrations.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250716184327_ImplementRecurrencePatternForSpecialMenuSchedules")]
-    partial class ImplementRecurrencePatternForSpecialMenuSchedules
+    [Migration("20250716185438_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

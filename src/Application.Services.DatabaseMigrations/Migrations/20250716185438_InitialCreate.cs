@@ -304,8 +304,7 @@ namespace Application.Services.DatabaseMigrations.Migrations
                     end_time = table.Column<LocalTime>(type: "time", nullable: false),
                     expiration_date = table.Column<LocalDate>(type: "date", nullable: true),
                     is_active = table.Column<bool>(type: "boolean", nullable: false),
-                    is_recurring = table.Column<bool>(type: "boolean", nullable: false),
-                    recurrence_pattern = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false)
+                    recurrence_pattern = table.Column<string>(type: "jsonb", nullable: false)
                 },
                 constraints: table =>
                 {
