@@ -1,5 +1,7 @@
+using Application.Domain.Entities;
 using Application.Infrastructure.Data.Context;
 
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Application.Services.DatabaseMigrations;
@@ -25,6 +27,8 @@ public class Program
             options.EnableDetailedErrors();
             #endif
         });
+        builder.Services.AddProblemDetails();
+
         builder.Services.AddHostedService<Worker>();
 
         var host = builder.Build();

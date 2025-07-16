@@ -1,18 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using Application.Domain.Entities;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace Application.Infrastructure.Data.Context;
 
-public sealed class ApplicationDbContext : IdentityDbContext<
-    UserEntity,
-    RoleEntity,
-    long,
-    UserClaimEntity,
-    UserRoleEntity,
-    UserLoginEntity,
-    RoleClaimEntity,
-    UserTokenEntity>
+public sealed class ApplicationDbContext : DbContext
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 

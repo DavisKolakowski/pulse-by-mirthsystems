@@ -1,7 +1,9 @@
 using System.Diagnostics;
 
+using Application.Domain.Entities;
 using Application.Infrastructure.Data.Context;
 
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;

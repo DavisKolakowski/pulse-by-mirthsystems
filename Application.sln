@@ -15,8 +15,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Services.Databa
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Services.IdentityApi", "src\Application.Services.IdentityApi\Application.Services.IdentityApi.csproj", "{B7321032-63EC-448C-9183-45BDB2ECAC7B}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,10 +41,6 @@ Global
 		{400F4D89-A5CE-4272-941F-E53A3973F02D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{400F4D89-A5CE-4272-941F-E53A3973F02D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{400F4D89-A5CE-4272-941F-E53A3973F02D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B7321032-63EC-448C-9183-45BDB2ECAC7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B7321032-63EC-448C-9183-45BDB2ECAC7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B7321032-63EC-448C-9183-45BDB2ECAC7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B7321032-63EC-448C-9183-45BDB2ECAC7B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
