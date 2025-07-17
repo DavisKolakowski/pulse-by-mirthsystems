@@ -4,12 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Application.Contracts.Repositories;
 using Application.Contracts.Services;
+using Application.Infrastructure.Authorization;
+using Application.Infrastructure.Data.Repositories;
 using Application.Options;
 using Application.Services;
 
 using Azure;
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 
 using NodaTime;
@@ -64,30 +68,18 @@ public static class ServiceCollectionExtensions
         // Register repositories
         RegisterRepositories(services);
 
+
+        services.AddSingleton<IAuthorizationHandler, BackofficeAuthorizationHandler>();
+
         // TODO: Register other infrastructure services here
         // services.AddScoped<IFileStorageService, LocalFileStorageService>();
         // services.AddScoped<INotificationService, SignalRNotificationService>();
         return services;
     }
 
-    public static IServiceCollection AddApplicationAuthorization(this IServiceCollection services)
-    {
-        services.AddAuthorization(options =>
-        {
-            options.AddPolicy("system-admin", policy =>
-                              policy.RequireClaim("permissions", "system:admin"));
-            options.AddPolicy("content-manager", policy =>
-                              policy.RequireClaim("permissions", "content:manager"));
-        });
-
-        return services;
-    }
-
     private static void RegisterRepositories(IServiceCollection services)
     {
-        // Register specific repositories with their interfaces
-
-        // Note: BaseRepository<,> is abstract and should not be registered directly.
-        // Only concrete implementations should be registered with the DI container.
+        services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IVenueUserRoleRepository, VenueUserRoleRepository>();
     }
 }
