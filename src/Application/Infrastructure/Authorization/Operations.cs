@@ -7,36 +7,81 @@ using Application.Domain.Entities;
 using Azure;
 
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization.Infrastructure;
 
 namespace Application.Infrastructure.Authorization;
 
 public static class Operations
 {
-    public static class Venues
+    public static class Venue
     {
-        public static VenueOperationRequirement Create = new() { Name = nameof(Create) };
-        public static VenueOperationRequirement Read = new() { Name = nameof(Read) };
-        public static VenueOperationRequirement Update = new() { Name = nameof(Update) };
-        public static VenueOperationRequirement Activate = new() { Name = nameof(Activate) };
-        public static VenueOperationRequirement Deactivate = new() { Name = nameof(Deactivate) };
-        public static VenueOperationRequirement Delete = new() { Name = nameof(Delete) };
-    }
+        public static OperationAuthorizationRequirement Create = new OperationAuthorizationRequirement
+        { 
+            Name = "venue:create" 
+        };
+        public static OperationAuthorizationRequirement Access = new OperationAuthorizationRequirement
+        { 
+            Name = "venue:access" 
+        };
+        public static OperationAuthorizationRequirement Update = new OperationAuthorizationRequirement
+        { 
+            Name = "venue:update" 
+        };
+        public static OperationAuthorizationRequirement Activate = new OperationAuthorizationRequirement
+        { 
+            Name = "venue:activate"
+        };
+        public static OperationAuthorizationRequirement Deactivate = new OperationAuthorizationRequirement
+        { 
+            Name = "venue:deactivate"
+        };
+        public static OperationAuthorizationRequirement Delete = new OperationAuthorizationRequirement
+        { 
+            Name = "venue:delete"
+        };
 
-    public static class Users
-    {
-        public static VenueOperationRequirement Invite = new() { Name = nameof(Invite) };
-        public static VenueOperationRequirement Uninvite = new() { Name = nameof(Uninvite) };
-        public static VenueOperationRequirement Update = new() { Name = nameof(Update) };
-        public static VenueOperationRequirement Remove = new() { Name = nameof(Remove) };
-    }
+        public static class Users
+        {
+            public static OperationAuthorizationRequirement Invite = new OperationAuthorizationRequirement
+            {
+                Name = "venue-users:invite"
+            };
+            public static OperationAuthorizationRequirement Uninvite = new OperationAuthorizationRequirement
+            {
+                Name = "venue-users:uninvite"
+            };
+            public static OperationAuthorizationRequirement Update = new OperationAuthorizationRequirement
+            {
+                Name = "venue-users:update"
+            };
+            public static OperationAuthorizationRequirement Remove = new OperationAuthorizationRequirement
+            {
+                Name = "venue-users:remove"
+            };
+        }
 
-    public static class Menus
-    {
-        public static VenueOperationRequirement Create = new() { Name = nameof(Create) };
-        public static VenueOperationRequirement Read = new() { Name = nameof(Read) };
-        public static VenueOperationRequirement Update = new() { Name = nameof(Update) };
-        public static VenueOperationRequirement Activate = new() { Name = nameof(Activate) };
-        public static VenueOperationRequirement Deactivate = new() { Name = nameof(Deactivate) };
-        public static VenueOperationRequirement Delete = new() { Name = nameof(Delete) };
+        public static class Specials
+        {
+            public static OperationAuthorizationRequirement Create = new OperationAuthorizationRequirement
+            {
+                Name = "venue-specials:create"
+            };
+            public static OperationAuthorizationRequirement Update = new OperationAuthorizationRequirement
+            {
+                Name = "venue-specials:update"
+            };
+            public static OperationAuthorizationRequirement Activate = new OperationAuthorizationRequirement
+            {
+                Name = "venue-specials:activate"
+            };
+            public static OperationAuthorizationRequirement Deactivate = new OperationAuthorizationRequirement
+            {
+                Name = "venue-specials:deactivate"
+            };
+            public static OperationAuthorizationRequirement Delete = new OperationAuthorizationRequirement
+            {
+                Name = "venue-specials:delete"
+            };
+        }
     }
 }

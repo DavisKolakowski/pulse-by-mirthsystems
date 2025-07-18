@@ -11,9 +11,9 @@ public class UserEntityConfiguration : IEntityTypeConfiguration<UserEntity>
         builder.HasIndex(u => u.Sub)
                .IsUnique()
                .HasDatabaseName("ix_users_sub");
-        builder.HasIndex(u => u.Email)
+        builder.HasIndex(u => u.EmailAddress)
                .IsUnique()
-               .HasDatabaseName("ix_users_email");
+               .HasDatabaseName("ix_users_email_address");
         builder.HasIndex(u => u.IsActive)
                .HasDatabaseName("ix_users_is_active");
 

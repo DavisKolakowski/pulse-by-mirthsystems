@@ -69,7 +69,7 @@ public static class ServiceCollectionExtensions
         RegisterRepositories(services);
 
 
-        services.AddSingleton<IAuthorizationHandler, BackofficeAuthorizationHandler>();
+        services.AddSingleton<IAuthorizationHandler, VenueAuthorizationHandler>();
 
         // TODO: Register other infrastructure services here
         // services.AddScoped<IFileStorageService, LocalFileStorageService>();

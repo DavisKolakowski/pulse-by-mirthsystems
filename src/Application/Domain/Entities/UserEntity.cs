@@ -13,14 +13,29 @@ public class UserEntity
     [Column("sub")]
     [Required]
     [MaxLength(100)]
-    public string Sub { get; set; } = null!; // 'sub' claim
+    public string Sub { get; set; } = null!; // Keycloak 'sub' claim (UUID string)
 
-    [Column("email")]
+    [Column("username")]
+    [Required]
+    [MaxLength(100)]
+    public string UserName { get; set; } = null!;
+
+    [Column("first_name")]
+    [Required]
+    [MaxLength(100)]
+    public string FirstName { get; set; } = null!;
+
+    [Column("last_name")]
+    [Required]
+    [MaxLength(100)]
+    public string LastName { get; set; } = null!;
+
+    [Column("email_address")]
     [Required]
     [EmailAddress]
     [MaxLength(254)]
-    public string Email { get; set; } = null!;
-    
+    public string EmailAddress { get; set; } = null!;
+
     [Column("is_active")]
     public bool IsActive { get; set; }
 
@@ -31,7 +46,7 @@ public class UserEntity
     public Instant UpdatedAt { get; set; }
 
     [Column("last_login_at")]
-    public Instant? LastLoginAt { get; set; }
+    public Instant LastLoginAt { get; set; }
 
 
     public List<VenueUserRoleEntity> VenueRoles { get; set; } = new List<VenueUserRoleEntity>();
