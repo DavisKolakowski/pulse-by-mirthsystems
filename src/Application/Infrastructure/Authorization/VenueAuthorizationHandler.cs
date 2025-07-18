@@ -13,12 +13,12 @@ namespace Application.Infrastructure.Authorization;
 
 public class VenueAuthorizationHandler : AuthorizationHandler<OperationAuthorizationRequirement, VenueEntity>
 {
-    private readonly IUserRepository _userRepository;
+    private readonly IUserRepository _usersRepository;
     private readonly IVenueUserRoleRepository _venueUserRoleRepository;
 
-    public VenueAuthorizationHandler(IUserRepository userRepository, IVenueUserRoleRepository venueUserRoleRepository)
+    public VenueAuthorizationHandler(IUserRepository usersRepository, IVenueUserRoleRepository venueUserRoleRepository)
     {
-        _userRepository = userRepository;
+        _usersRepository = usersRepository;
         _venueUserRoleRepository = venueUserRoleRepository;
     }
 
@@ -63,14 +63,14 @@ public class VenueAuthorizationHandler : AuthorizationHandler<OperationAuthoriza
             return;
         }
 
-        var user = await _userRepository.GetBySubAsync(userSub);
+        var user = await _usersRepository.GetUserBySubAsync(userSub);
         if (user == null)
         {
             context.Fail();
             return;
         }
 
-        var userRole = await _venueUserRoleRepository.GetUserRoleForVenueAsync(user.Id, resource.Id);
+        var userRole = await _venueUserRoleRepository.GetVenueRoleForUserAsync(user.Id, resource.Id);
         if (userRole == null || !userRole.IsActive)
         {
             context.Fail();
@@ -95,7 +95,6 @@ public class VenueAuthorizationHandler : AuthorizationHandler<OperationAuthoriza
                                requirement == Operations.Venue.Specials.Deactivate ||
                                requirement == Operations.Venue.Specials.Delete;
                 break;
-
             case "venue-manager":
                 isAuthorized = requirement == Operations.Venue.Access ||
                                requirement == Operations.Venue.Update ||
@@ -105,7 +104,6 @@ public class VenueAuthorizationHandler : AuthorizationHandler<OperationAuthoriza
                                requirement == Operations.Venue.Specials.Deactivate ||
                                requirement == Operations.Venue.Specials.Delete;
                 break;
-
             case "venue-staff":
                 isAuthorized = requirement == Operations.Venue.Access ||
                                requirement == Operations.Venue.Specials.Create ||
@@ -114,7 +112,6 @@ public class VenueAuthorizationHandler : AuthorizationHandler<OperationAuthoriza
                                requirement == Operations.Venue.Specials.Deactivate ||
                                requirement == Operations.Venue.Specials.Delete;
                 break;
-
             default:
                 isAuthorized = false;
                 break;

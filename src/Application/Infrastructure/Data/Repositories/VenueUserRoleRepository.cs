@@ -1,7 +1,4 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-
-using Application.Contracts.Repositories;
+﻿using Application.Contracts.Repositories;
 using Application.Domain.Entities;
 using Application.Infrastructure.Data.Context;
 
@@ -12,13 +9,11 @@ namespace Application.Infrastructure.Data.Repositories;
 public class VenueUserRoleRepository : IVenueUserRoleRepository
 {
     private readonly ApplicationDbContext _context;
-
     public VenueUserRoleRepository(ApplicationDbContext context)
     {
         _context = context;
     }
-
-    public async Task<VenueUserRoleEntity?> GetUserRoleForVenueAsync(long userId, long venueId, CancellationToken cancellationToken = default)
+    public async Task<VenueUserRoleEntity?> GetVenueRoleForUserAsync(long userId, long venueId, CancellationToken cancellationToken = default)
     {
         return await _context.VenueUserRoles
             .Include(vur => vur.Role)
