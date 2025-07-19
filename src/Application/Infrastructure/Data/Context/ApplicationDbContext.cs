@@ -1,5 +1,8 @@
-using Microsoft.EntityFrameworkCore;
 using Application.Domain.Entities;
+using Application.Infrastructure.Data.ValueGenerators;
+
+using Microsoft.EntityFrameworkCore;
+
 using NodaTime;
 
 namespace Application.Infrastructure.Data.Context;
@@ -45,37 +48,5 @@ public sealed class ApplicationDbContext : DbContext
         builder.HasPostgresExtension("postgis_topology");
 
         builder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
-    }
-
-    public override int SaveChanges()
-    {
-        foreach (var entry in ChangeTracker.Entries<EntityBase>())
-        {
-            if (entry.State == EntityState.Added)
-            {
-                entry.Entity.CreatedAt = this._clock.GetCurrentInstant();
-            }
-            else if (entry.State == EntityState.Modified)
-            {
-                entry.Entity.UpdatedAt = this._clock.GetCurrentInstant();
-            }
-        }
-        return base.SaveChanges();
-    }
-
-    public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
-    {
-        foreach (var entry in ChangeTracker.Entries<EntityBase>())
-        {
-            if (entry.State == EntityState.Added)
-            {
-                entry.Entity.CreatedAt = this._clock.GetCurrentInstant();
-            }
-            else if (entry.State == EntityState.Modified)
-            {
-                entry.Entity.UpdatedAt = this._clock.GetCurrentInstant();
-            }
-        }
-        return await base.SaveChangesAsync(cancellationToken);
     }
 }

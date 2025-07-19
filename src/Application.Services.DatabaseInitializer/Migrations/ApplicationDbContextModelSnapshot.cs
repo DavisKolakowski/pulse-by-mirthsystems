@@ -45,6 +45,7 @@ namespace Application.Services.DatabaseInitializer.Migrations
                         .HasColumnName("close_time");
 
                     b.Property<Instant>("CreatedAt")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_at");
 
@@ -61,6 +62,7 @@ namespace Application.Services.DatabaseInitializer.Migrations
                         .HasColumnName("open_time");
 
                     b.Property<Instant?>("UpdatedAt")
+                        .ValueGeneratedOnUpdate()
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_at");
 
@@ -89,6 +91,7 @@ namespace Application.Services.DatabaseInitializer.Migrations
                         .HasColumnName("id");
 
                     b.Property<Instant>("CreatedAt")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_at");
 
@@ -117,6 +120,7 @@ namespace Application.Services.DatabaseInitializer.Migrations
                         .HasColumnName("sort_order");
 
                     b.Property<Instant?>("UpdatedAt")
+                        .ValueGeneratedOnUpdate()
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_at");
 
@@ -138,6 +142,7 @@ namespace Application.Services.DatabaseInitializer.Migrations
                         .HasColumnName("id");
 
                     b.Property<Instant>("CreatedAt")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_at");
 
@@ -162,6 +167,7 @@ namespace Application.Services.DatabaseInitializer.Migrations
                         .HasColumnName("sort_order");
 
                     b.Property<Instant?>("UpdatedAt")
+                        .ValueGeneratedOnUpdate()
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_at");
 
@@ -187,6 +193,7 @@ namespace Application.Services.DatabaseInitializer.Migrations
                         .HasColumnName("additional_data");
 
                     b.Property<Instant>("CreatedAt")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_at");
 
@@ -209,6 +216,7 @@ namespace Application.Services.DatabaseInitializer.Migrations
                         .HasColumnName("special_menu_id");
 
                     b.Property<Instant?>("UpdatedAt")
+                        .ValueGeneratedOnUpdate()
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_at");
 
@@ -245,6 +253,7 @@ namespace Application.Services.DatabaseInitializer.Migrations
                         .HasColumnName("id");
 
                     b.Property<Instant>("CreatedAt")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_at");
 
@@ -260,6 +269,7 @@ namespace Application.Services.DatabaseInitializer.Migrations
                         .HasColumnName("name");
 
                     b.Property<Instant?>("UpdatedAt")
+                        .ValueGeneratedOnUpdate()
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_at");
 
@@ -288,6 +298,7 @@ namespace Application.Services.DatabaseInitializer.Migrations
                         .HasColumnName("id");
 
                     b.Property<Instant>("CreatedAt")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_at");
 
@@ -316,6 +327,7 @@ namespace Application.Services.DatabaseInitializer.Migrations
                         .HasColumnName("start_time");
 
                     b.Property<Instant?>("UpdatedAt")
+                        .ValueGeneratedOnUpdate()
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_at");
 
@@ -342,6 +354,7 @@ namespace Application.Services.DatabaseInitializer.Migrations
                         .HasColumnName("id");
 
                     b.Property<Instant>("CreatedAt")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_at");
 
@@ -378,6 +391,7 @@ namespace Application.Services.DatabaseInitializer.Migrations
                         .HasColumnName("name_identifier");
 
                     b.Property<Instant?>("UpdatedAt")
+                        .ValueGeneratedOnUpdate()
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_at");
 
@@ -412,6 +426,7 @@ namespace Application.Services.DatabaseInitializer.Migrations
                         .HasColumnName("id");
 
                     b.Property<Instant>("CreatedAt")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_at");
 
@@ -436,6 +451,7 @@ namespace Application.Services.DatabaseInitializer.Migrations
                         .HasColumnName("sort_order");
 
                     b.Property<Instant?>("UpdatedAt")
+                        .ValueGeneratedOnUpdate()
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_at");
 
@@ -467,6 +483,7 @@ namespace Application.Services.DatabaseInitializer.Migrations
                         .HasColumnName("country");
 
                     b.Property<Instant>("CreatedAt")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_at");
 
@@ -535,6 +552,7 @@ namespace Application.Services.DatabaseInitializer.Migrations
                         .HasColumnName("street_address");
 
                     b.Property<Instant?>("UpdatedAt")
+                        .ValueGeneratedOnUpdate()
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_at");
 
@@ -582,6 +600,7 @@ namespace Application.Services.DatabaseInitializer.Migrations
                         .HasColumnName("accepted_by_user_id");
 
                     b.Property<Instant>("CreatedAt")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_at");
 
@@ -608,6 +627,7 @@ namespace Application.Services.DatabaseInitializer.Migrations
                         .HasColumnName("role_id");
 
                     b.Property<Instant?>("UpdatedAt")
+                        .ValueGeneratedOnUpdate()
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_at");
 
@@ -664,6 +684,7 @@ namespace Application.Services.DatabaseInitializer.Migrations
                         .HasColumnName("id");
 
                     b.Property<Instant>("CreatedAt")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_at");
 
@@ -678,6 +699,7 @@ namespace Application.Services.DatabaseInitializer.Migrations
                         .HasColumnName("name");
 
                     b.Property<Instant?>("UpdatedAt")
+                        .ValueGeneratedOnUpdate()
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_at");
 
@@ -699,6 +721,7 @@ namespace Application.Services.DatabaseInitializer.Migrations
                         .HasColumnName("id");
 
                     b.Property<Instant>("CreatedAt")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_at");
 
@@ -724,6 +747,7 @@ namespace Application.Services.DatabaseInitializer.Migrations
                         .HasColumnName("role_id");
 
                     b.Property<Instant?>("UpdatedAt")
+                        .ValueGeneratedOnUpdate()
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_at");
 

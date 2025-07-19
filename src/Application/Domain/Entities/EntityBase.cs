@@ -7,7 +7,7 @@ public abstract class EntityBase
 {
     public Guid Id { get; private set; }
 
-    public Instant CreatedAt { get; set; }
+    public Instant CreatedAt { get; private set; }
 
-    public Instant? UpdatedAt { get; set; }
+    public Instant? UpdatedAt { get; private set; }
 }

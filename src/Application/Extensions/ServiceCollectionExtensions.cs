@@ -8,6 +8,7 @@ using Application.Contracts.Repositories;
 using Application.Contracts.Services;
 using Application.Infrastructure.Authorization;
 using Application.Infrastructure.Data.Repositories;
+using Application.Infrastructure.Data.ValueGenerators;
 using Application.Options;
 using Application.Services;
 
