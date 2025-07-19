@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Application.Domain.Entities;
-using Application.Infrastructure.Data.ValueGenerators;
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -25,18 +24,12 @@ public abstract class EntityBaseConfiguration<TEntity> : IEntityTypeConfiguratio
         builder.HasKey(e => e.Id);
 
         builder.Property(e => e.Id)
-            .HasColumnName("id")
-            .HasValueGenerator<GuidV7ValueGenerator>()
-            .ValueGeneratedOnAdd();
+            .HasColumnName("id");
 
         builder.Property(e => e.CreatedAt)
-            .HasColumnName("created_at")
-            .HasValueGenerator<CurrentInstantValueGenerator>()
-            .ValueGeneratedOnAdd();
+            .HasColumnName("created_at");
 
         builder.Property(e => e.UpdatedAt)
-            .HasColumnName("updated_at")
-            .HasValueGenerator<CurrentInstantValueGenerator>()
-            .ValueGeneratedOnUpdate();
+            .HasColumnName("updated_at");
     }
 }

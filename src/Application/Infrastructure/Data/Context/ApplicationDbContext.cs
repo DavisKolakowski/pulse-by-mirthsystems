@@ -1,5 +1,4 @@
 using Application.Domain.Entities;
-using Application.Infrastructure.Data.ValueGenerators;
 
 using Microsoft.EntityFrameworkCore;
 
@@ -48,5 +47,39 @@ public sealed class ApplicationDbContext : DbContext
         builder.HasPostgresExtension("postgis_topology");
 
         builder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
+    }
+
+    public override int SaveChanges()
+    {
+        foreach (var entry in ChangeTracker.Entries<EntityBase>())
+        {
+            switch (entry.State)
+            {
+                case EntityState.Added:
+                    entry.Entity.CreatedAt = this._clock.GetCurrentInstant();
+                    break;
+                case EntityState.Modified:
+                    entry.Entity.UpdatedAt = this._clock.GetCurrentInstant();
+                    break;
+            }
+        }
+        return base.SaveChanges();
+    }
+    public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+    {
+        var now = _clock.GetCurrentInstant().ToDateTimeUtc();
+        foreach (var entry in ChangeTracker.Entries<EntityBase>())
+        {
+            switch (entry.State)
+            {
+                case EntityState.Added:
+                    entry.Entity.CreatedAt = this._clock.GetCurrentInstant();
+                    break;
+                case EntityState.Modified:
+                    entry.Entity.UpdatedAt = this._clock.GetCurrentInstant();
+                    break;
+            }
+        }
+        return base.SaveChangesAsync(cancellationToken);
     }
 }
