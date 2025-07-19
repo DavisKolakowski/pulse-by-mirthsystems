@@ -4,11 +4,13 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Application.Infrastructure.Data.Configurations;
 
-public class UserEntityConfiguration : IEntityTypeConfiguration<UserEntity>
+public class UserEntityConfiguration : EntityBaseConfiguration<UserEntity>
 {
-    public void Configure(EntityTypeBuilder<UserEntity> builder)
+    public override void Configure(EntityTypeBuilder<UserEntity> builder)
     {
-        builder.HasIndex(u => u.Sub)
+        base.Configure(builder);
+
+        builder.HasIndex(u => u.NameIdentifier)
                .IsUnique()
                .HasDatabaseName("ix_users_sub");
         builder.HasIndex(u => u.EmailAddress)
@@ -16,8 +18,6 @@ public class UserEntityConfiguration : IEntityTypeConfiguration<UserEntity>
                .HasDatabaseName("ix_users_email_address");
         builder.HasIndex(u => u.IsActive)
                .HasDatabaseName("ix_users_is_active");
-
-        builder.HasKey(u => u.Id);
 
         builder.HasMany(u => u.VenueRoles)
                .WithOne(uvp => uvp.User)

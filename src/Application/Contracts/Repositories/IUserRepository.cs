@@ -7,5 +7,5 @@ namespace Application.Contracts.Repositories;
 
 public interface IUserRepository
 {
-    Task<UserEntity?> GetUserBySubAsync(string sub, CancellationToken cancellationToken = default);
+    Task<UserEntity?> GetUserByNameIdentifierAsync(string nameIdentifier, CancellationToken cancellationToken = default);
 }

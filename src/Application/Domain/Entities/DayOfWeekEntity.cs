@@ -4,11 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Application.Domain.Entities;
 
 [Table("days_of_week")]
-public class DayOfWeekEntity
+public class DayOfWeekEntity : EntityBase
 {
-    [Column("id")]
-    public byte Id { get; set; }
-
     [Column("name")]
     [Required]
     [MaxLength(20)]

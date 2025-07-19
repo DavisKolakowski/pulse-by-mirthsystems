@@ -18,8 +18,8 @@ public class UserRepository : IUserRepository
         _context = context;
     }
 
-    public async Task<UserEntity?> GetUserBySubAsync(string sub, CancellationToken cancellationToken = default)
+    public async Task<UserEntity?> GetUserByNameIdentifierAsync(string nameIdentifier, CancellationToken cancellationToken = default)
     {
-        return await _context.Users.FirstOrDefaultAsync(u => u.Sub == sub, cancellationToken);
+        return await _context.Users.FirstOrDefaultAsync(u => u.NameIdentifier == nameIdentifier, cancellationToken);
     }
 }

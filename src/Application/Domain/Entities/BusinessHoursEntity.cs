@@ -7,16 +7,13 @@ using NodaTime;
 namespace Application.Domain.Entities;
 
 [Table("business_hours")]
-public class BusinessHoursEntity
+public class BusinessHoursEntity : EntityBase
 {
-    [Column("id")]
-    public long Id { get; set; }
-
     [Column("venue_id")]
-    public long VenueId { get; set; }
+    public Guid VenueId { get; set; }
 
     [Column("day_of_week_id")]
-    public byte DayOfWeekId { get; set; }
+    public Guid DayOfWeekId { get; set; }
 
     [Column("open_time")]
     public LocalTime? OpenTime { get; set; }

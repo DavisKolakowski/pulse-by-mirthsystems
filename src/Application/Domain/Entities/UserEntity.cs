@@ -5,15 +5,12 @@ using NodaTime;
 namespace Application.Domain.Entities;
 
 [Table("users")]
-public class UserEntity
+public class UserEntity : EntityBase
 {
-    [Column("id")]
-    public long Id { get; set; }
-
-    [Column("sub")]
+    [Column("name_identifier")]
     [Required]
     [MaxLength(100)]
-    public string Sub { get; set; } = null!; // Keycloak 'sub' claim (UUID string)
+    public string NameIdentifier { get; set; } = null!; // Keycloak 'sub' claim (UUID string)
 
     [Column("username")]
     [Required]
@@ -38,12 +35,6 @@ public class UserEntity
 
     [Column("is_active")]
     public bool IsActive { get; set; }
-
-    [Column("created_at")]
-    public Instant CreatedAt { get; set; }
-
-    [Column("updated_at")]
-    public Instant UpdatedAt { get; set; }
 
     [Column("last_login_at")]
     public Instant LastLoginAt { get; set; }

@@ -4,11 +4,13 @@ using Application.Domain.Entities;
 
 namespace Application.Infrastructure.Data.Configurations;
 
-public class VenueInvitationEntityConfiguration : IEntityTypeConfiguration<VenueInvitationEntity>
+public class VenueInvitationEntityConfiguration : EntityBaseConfiguration<VenueInvitationEntity>
 {
-    public void Configure(EntityTypeBuilder<VenueInvitationEntity> builder)
+    public override void Configure(EntityTypeBuilder<VenueInvitationEntity> builder)
     {
-        builder.HasIndex(vi => new { vi.Email, vi.VenueId, vi.IsActive })
+        base.Configure(builder);
+
+        builder.HasIndex(vi => new { vi.EmailAddress, vi.VenueId, vi.IsActive })
                .HasDatabaseName("ix_venue_invitations_email_venue_active");
         builder.HasIndex(vi => vi.VenueId)
                .HasDatabaseName("ix_venue_invitations_venue_id");
@@ -18,8 +20,6 @@ public class VenueInvitationEntityConfiguration : IEntityTypeConfiguration<Venue
                .HasDatabaseName("ix_venue_invitations_expires_at");
         builder.HasIndex(vi => new { vi.IsActive, vi.AcceptedAt })
                .HasDatabaseName("ix_venue_invitations_active_accepted");
-
-        builder.HasKey(vi => vi.Id);
 
         builder.HasOne(vi => vi.Venue)
                .WithMany()

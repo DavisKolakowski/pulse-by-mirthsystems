@@ -1,10 +1,12 @@
-using Application.Domain.Entities;
+using Application.Extensions;
 using Application.Infrastructure.Data.Context;
+using Application.Services.DatabaseInitializer.Extensions;
+using Application.Services.DatabaseInitializer.Options;
 
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
-namespace Application.Services.DatabaseMigrations;
+namespace Application.Services.DatabaseInitializer;
 
 public class Program
 {
@@ -28,7 +30,13 @@ public class Program
             #endif
         });
         builder.Services.AddProblemDetails();
-
+        builder.Services.RegisterClock();
+        builder.Services.ConfigureSerilog();
+        builder.Services.ConfigureDataSetup(options =>
+        {
+            options.Bind(builder.Configuration.GetSection(DataOptions.ConfigurationSection));
+        });
+        builder.Services.AddTransient<DbSetup>();
         builder.Services.AddHostedService<Worker>();
 
         var host = builder.Build();

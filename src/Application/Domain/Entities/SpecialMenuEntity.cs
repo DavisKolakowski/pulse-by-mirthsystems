@@ -6,13 +6,10 @@ using NodaTime;
 namespace Application.Domain.Entities;
 
 [Table("special_menus")]
-public class SpecialMenuEntity
+public class SpecialMenuEntity : EntityBase
 {
-    [Column("id")]
-    public long Id { get; set; }
-
     [Column("venue_id")]
-    public long VenueId { get; set; }
+    public Guid VenueId { get; set; }
 
     [Column("name")]
     [Required]
@@ -22,12 +19,6 @@ public class SpecialMenuEntity
     [Column("description")]
     [MaxLength(500)]
     public string? Description { get; set; }
-
-    [Column("created_at")]
-    public Instant CreatedAt { get; set; }
-
-    [Column("updated_at")]
-    public Instant? UpdatedAt { get; set; }
 
     public VenueEntity Venue { get; set; } = null!;
     public List<SpecialMenuScheduleEntity> Schedules { get; set; } = new List<SpecialMenuScheduleEntity>();

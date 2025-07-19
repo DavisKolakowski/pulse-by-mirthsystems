@@ -10,13 +10,10 @@ using NodaTime;
 namespace Application.Domain.Entities;
 
 [Table("venues")]
-public class VenueEntity
+public class VenueEntity : EntityBase
 {
-    [Column("id")]
-    public long Id { get; set; }
-
     [Column("category_id")]
-    public int CategoryId { get; set; }
+    public Guid CategoryId { get; set; }
 
     [Column("name")]
     [Required]

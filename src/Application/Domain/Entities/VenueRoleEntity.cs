@@ -4,11 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Application.Domain.Entities;
 
 [Table("venue_roles")]
-public class VenueRoleEntity
+public class VenueRoleEntity : EntityBase
 {
-    [Column("id")]
-    public int Id { get; set; }
-
     [Column("name")]
     [Required]
     public string Name { get; set; } = null!; // "venue-owner" | "venue-manager" | "venue-staff" 

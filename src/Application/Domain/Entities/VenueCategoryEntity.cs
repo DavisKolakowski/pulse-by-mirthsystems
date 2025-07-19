@@ -4,11 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Application.Domain.Entities;
 
 [Table("venue_categories")]
-public class VenueCategoryEntity
+public class VenueCategoryEntity : EntityBase
 {
-    [Column("id")]
-    public int Id { get; set; }
-
     [Column("name")]
     [Required]
     [MaxLength(50)]

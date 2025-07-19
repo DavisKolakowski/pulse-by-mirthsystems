@@ -4,10 +4,12 @@ using Application.Domain.Entities;
 
 namespace Application.Infrastructure.Data.Configurations;
 
-public class VenueUserRoleEntityConfiguration : IEntityTypeConfiguration<VenueUserRoleEntity>
+public class VenueUserRoleEntityConfiguration : EntityBaseConfiguration<VenueUserRoleEntity>
 {
-    public void Configure(EntityTypeBuilder<VenueUserRoleEntity> builder)
+    public override void Configure(EntityTypeBuilder<VenueUserRoleEntity> builder)
     {
+        base.Configure(builder);
+
         builder.HasIndex(vur => new { vur.UserId, vur.VenueId })
                .IsUnique()
                .HasDatabaseName("ix_venue_user_roles_user_venue");
@@ -17,8 +19,6 @@ public class VenueUserRoleEntityConfiguration : IEntityTypeConfiguration<VenueUs
                .HasDatabaseName("ix_venue_user_roles_is_active");
         builder.HasIndex(vur => new { vur.VenueId, vur.RoleId, vur.IsActive })
                .HasDatabaseName("ix_venue_user_roles_venue_role_active");
-
-        builder.HasKey(vur => vur.Id);
 
         builder.HasOne(vur => vur.User)
                .WithMany(u => u.VenueRoles)

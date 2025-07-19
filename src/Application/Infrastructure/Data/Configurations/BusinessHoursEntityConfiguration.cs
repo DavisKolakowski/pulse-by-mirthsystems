@@ -4,15 +4,16 @@ using Application.Domain.Entities;
 
 namespace Application.Infrastructure.Data.Configurations;
 
-public class BusinessHoursEntityConfiguration : IEntityTypeConfiguration<BusinessHoursEntity>
+public class BusinessHoursEntityConfiguration : EntityBaseConfiguration<BusinessHoursEntity>
 {
-    public void Configure(EntityTypeBuilder<BusinessHoursEntity> builder)
+    public override void Configure(EntityTypeBuilder<BusinessHoursEntity> builder)
     {
-        builder.HasKey(bh => bh.Id);
+        base.Configure(builder);
 
         builder.HasIndex(bh => new { bh.VenueId, bh.DayOfWeekId })
                .IsUnique()
                .HasDatabaseName("ix_business_hours_venue_day");
+
         builder.HasOne(bh => bh.Venue)
                .WithMany(v => v.BusinessHours)
                .HasForeignKey(bh => bh.VenueId)

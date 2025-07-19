@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "Application.Services.DatabaseMigrations": {
+    "Application.Services.DatabaseInitializer": {
       "commandName": "Project",
       "environmentVariables": {
         "DOTNET_ENVIRONMENT": "Development"

@@ -1,13 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 using NetTopologySuite.Geometries;
 using NodaTime;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
-
-namespace Application.Services.DatabaseMigrations.Migrations
+namespace Application.Services.DatabaseInitializer.Migrations
 {
     /// <inheritdoc />
     public partial class InitialCreate : Migration
@@ -30,12 +28,14 @@ namespace Application.Services.DatabaseMigrations.Migrations
                 name: "days_of_week",
                 columns: table => new
                 {
-                    id = table.Column<byte>(type: "smallint", nullable: false),
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
                     name = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
                     short_name = table.Column<string>(type: "character varying(3)", maxLength: 3, nullable: false),
                     iso_number = table.Column<int>(type: "integer", nullable: false),
                     is_weekday = table.Column<bool>(type: "boolean", nullable: false),
-                    sort_order = table.Column<int>(type: "integer", nullable: false)
+                    sort_order = table.Column<int>(type: "integer", nullable: false),
+                    created_at = table.Column<Instant>(type: "timestamp with time zone", nullable: false),
+                    updated_at = table.Column<Instant>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -46,12 +46,13 @@ namespace Application.Services.DatabaseMigrations.Migrations
                 name: "special_categories",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
                     name = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     description = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: true),
                     icon = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: true),
-                    sort_order = table.Column<int>(type: "integer", nullable: false)
+                    sort_order = table.Column<int>(type: "integer", nullable: false),
+                    created_at = table.Column<Instant>(type: "timestamp with time zone", nullable: false),
+                    updated_at = table.Column<Instant>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -62,14 +63,16 @@ namespace Application.Services.DatabaseMigrations.Migrations
                 name: "users",
                 columns: table => new
                 {
-                    id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    sub = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
-                    email = table.Column<string>(type: "character varying(254)", maxLength: 254, nullable: false),
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    name_identifier = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    username = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    first_name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    last_name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    email_address = table.Column<string>(type: "character varying(254)", maxLength: 254, nullable: false),
                     is_active = table.Column<bool>(type: "boolean", nullable: false),
+                    last_login_at = table.Column<Instant>(type: "timestamp with time zone", nullable: false),
                     created_at = table.Column<Instant>(type: "timestamp with time zone", nullable: false),
-                    updated_at = table.Column<Instant>(type: "timestamp with time zone", nullable: false),
-                    last_login_at = table.Column<Instant>(type: "timestamp with time zone", nullable: true)
+                    updated_at = table.Column<Instant>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -80,12 +83,13 @@ namespace Application.Services.DatabaseMigrations.Migrations
                 name: "venue_categories",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
                     name = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     description = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: true),
                     icon = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: true),
-                    sort_order = table.Column<int>(type: "integer", nullable: false)
+                    sort_order = table.Column<int>(type: "integer", nullable: false),
+                    created_at = table.Column<Instant>(type: "timestamp with time zone", nullable: false),
+                    updated_at = table.Column<Instant>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -96,10 +100,11 @@ namespace Application.Services.DatabaseMigrations.Migrations
                 name: "venue_roles",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
                     name = table.Column<string>(type: "text", nullable: false),
-                    description = table.Column<string>(type: "text", nullable: false)
+                    description = table.Column<string>(type: "text", nullable: false),
+                    created_at = table.Column<Instant>(type: "timestamp with time zone", nullable: false),
+                    updated_at = table.Column<Instant>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -110,9 +115,8 @@ namespace Application.Services.DatabaseMigrations.Migrations
                 name: "venues",
                 columns: table => new
                 {
-                    id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    category_id = table.Column<int>(type: "integer", nullable: false),
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    category_id = table.Column<Guid>(type: "uuid", nullable: false),
                     name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     description = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: true),
                     phone_number = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: true),
@@ -126,7 +130,9 @@ namespace Application.Services.DatabaseMigrations.Migrations
                     postal_code = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
                     country = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     location = table.Column<Point>(type: "geography (point)", nullable: false),
-                    is_active = table.Column<bool>(type: "boolean", nullable: false)
+                    is_active = table.Column<bool>(type: "boolean", nullable: false),
+                    created_at = table.Column<Instant>(type: "timestamp with time zone", nullable: false),
+                    updated_at = table.Column<Instant>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -143,13 +149,14 @@ namespace Application.Services.DatabaseMigrations.Migrations
                 name: "business_hours",
                 columns: table => new
                 {
-                    id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    venue_id = table.Column<long>(type: "bigint", nullable: false),
-                    day_of_week_id = table.Column<byte>(type: "smallint", nullable: false),
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    venue_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    day_of_week_id = table.Column<Guid>(type: "uuid", nullable: false),
                     open_time = table.Column<LocalTime>(type: "time", nullable: true),
                     close_time = table.Column<LocalTime>(type: "time", nullable: true),
-                    is_closed = table.Column<bool>(type: "boolean", nullable: false)
+                    is_closed = table.Column<bool>(type: "boolean", nullable: false),
+                    created_at = table.Column<Instant>(type: "timestamp with time zone", nullable: false),
+                    updated_at = table.Column<Instant>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -172,9 +179,8 @@ namespace Application.Services.DatabaseMigrations.Migrations
                 name: "special_menus",
                 columns: table => new
                 {
-                    id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    venue_id = table.Column<long>(type: "bigint", nullable: false),
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    venue_id = table.Column<Guid>(type: "uuid", nullable: false),
                     name = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
                     description = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: true),
                     created_at = table.Column<Instant>(type: "timestamp with time zone", nullable: false),
@@ -195,20 +201,19 @@ namespace Application.Services.DatabaseMigrations.Migrations
                 name: "venue_invitations",
                 columns: table => new
                 {
-                    id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
                     email = table.Column<string>(type: "character varying(254)", maxLength: 254, nullable: false),
-                    venue_id = table.Column<long>(type: "bigint", nullable: false),
-                    role_id = table.Column<int>(type: "integer", nullable: false),
-                    invited_by_user_id = table.Column<long>(type: "bigint", nullable: false),
-                    invited_at = table.Column<Instant>(type: "timestamp with time zone", nullable: false),
+                    venue_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    role_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    invited_by_user_id = table.Column<Guid>(type: "uuid", nullable: false),
                     expires_at = table.Column<Instant>(type: "timestamp with time zone", nullable: false),
                     accepted_at = table.Column<Instant>(type: "timestamp with time zone", nullable: true),
-                    accepted_by_user_id = table.Column<long>(type: "bigint", nullable: true),
+                    accepted_by_user_id = table.Column<Guid>(type: "uuid", nullable: true),
                     is_active = table.Column<bool>(type: "boolean", nullable: false),
-                    notes = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: true),
-                    venue_entity_id = table.Column<long>(type: "bigint", nullable: true),
-                    venue_role_entity_id = table.Column<int>(type: "integer", nullable: true)
+                    venue_entity_id = table.Column<Guid>(type: "uuid", nullable: true),
+                    venue_role_entity_id = table.Column<Guid>(type: "uuid", nullable: true),
+                    created_at = table.Column<Instant>(type: "timestamp with time zone", nullable: false),
+                    updated_at = table.Column<Instant>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -253,15 +258,16 @@ namespace Application.Services.DatabaseMigrations.Migrations
                 name: "venue_user_roles",
                 columns: table => new
                 {
-                    id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    user_id = table.Column<long>(type: "bigint", nullable: false),
-                    venue_id = table.Column<long>(type: "bigint", nullable: false),
-                    role_id = table.Column<int>(type: "integer", nullable: false),
-                    granted_by_user_id = table.Column<long>(type: "bigint", nullable: false),
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    user_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    venue_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    role_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    granted_by_user_id = table.Column<Guid>(type: "uuid", nullable: false),
                     granted_at = table.Column<Instant>(type: "timestamp with time zone", nullable: false),
                     is_active = table.Column<bool>(type: "boolean", nullable: false),
-                    notes = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: true)
+                    notes = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: true),
+                    created_at = table.Column<Instant>(type: "timestamp with time zone", nullable: false),
+                    updated_at = table.Column<Instant>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -296,14 +302,15 @@ namespace Application.Services.DatabaseMigrations.Migrations
                 name: "special_menu_schedules",
                 columns: table => new
                 {
-                    id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    special_menu_id = table.Column<long>(type: "bigint", nullable: false),
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    special_menu_id = table.Column<Guid>(type: "uuid", nullable: false),
                     start_date = table.Column<LocalDate>(type: "date", nullable: false),
                     start_time = table.Column<LocalTime>(type: "time", nullable: false),
                     end_time = table.Column<LocalTime>(type: "time", nullable: false),
                     expiration_date = table.Column<LocalDate>(type: "date", nullable: true),
                     is_active = table.Column<bool>(type: "boolean", nullable: false),
+                    created_at = table.Column<Instant>(type: "timestamp with time zone", nullable: false),
+                    updated_at = table.Column<Instant>(type: "timestamp with time zone", nullable: true),
                     recurrence_pattern = table.Column<string>(type: "jsonb", nullable: false)
                 },
                 constraints: table =>
@@ -321,14 +328,15 @@ namespace Application.Services.DatabaseMigrations.Migrations
                 name: "specials",
                 columns: table => new
                 {
-                    id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    venue_id = table.Column<long>(type: "bigint", nullable: false),
-                    special_category_id = table.Column<int>(type: "integer", nullable: false),
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    venue_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    special_category_id = table.Column<Guid>(type: "uuid", nullable: false),
                     description = table.Column<string>(type: "character varying(1000)", maxLength: 1000, nullable: false),
                     is_active = table.Column<bool>(type: "boolean", nullable: false),
-                    special_menu_id = table.Column<long>(type: "bigint", nullable: true),
-                    additional_data = table.Column<string>(type: "jsonb", nullable: true)
+                    special_menu_id = table.Column<Guid>(type: "uuid", nullable: true),
+                    additional_data = table.Column<string>(type: "jsonb", nullable: true),
+                    created_at = table.Column<Instant>(type: "timestamp with time zone", nullable: false),
+                    updated_at = table.Column<Instant>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -351,56 +359,6 @@ namespace Application.Services.DatabaseMigrations.Migrations
                         principalTable: "venues",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.InsertData(
-                table: "days_of_week",
-                columns: new[] { "id", "is_weekday", "iso_number", "name", "short_name", "sort_order" },
-                values: new object[,]
-                {
-                    { (byte)1, false, 7, "Sunday", "SUN", 1 },
-                    { (byte)2, true, 1, "Monday", "MON", 2 },
-                    { (byte)3, true, 2, "Tuesday", "TUE", 3 },
-                    { (byte)4, true, 3, "Wednesday", "WED", 4 },
-                    { (byte)5, true, 4, "Thursday", "THU", 5 },
-                    { (byte)6, true, 5, "Friday", "FRI", 6 },
-                    { (byte)7, false, 6, "Saturday", "SAT", 7 }
-                });
-
-            migrationBuilder.InsertData(
-                table: "special_categories",
-                columns: new[] { "id", "description", "icon", "name", "sort_order" },
-                values: new object[,]
-                {
-                    { 1, "Food specials, appetizers, and meal deals", "🍔", "Food", 1 },
-                    { 2, "Drink specials, happy hours, and beverage promotions", "🍺", "Drink", 2 },
-                    { 3, "Live music, DJs, trivia, karaoke, and other events", "🎵", "Entertainment", 3 }
-                });
-
-            migrationBuilder.InsertData(
-                table: "venue_categories",
-                columns: new[] { "id", "description", "icon", "name", "sort_order" },
-                values: new object[,]
-                {
-                    { 1, "Dining establishments offering food and beverages", "🍽️", "Restaurant", 1 },
-                    { 2, "Venues focused on drinks and nightlife", "🍸", "Bar", 2 },
-                    { 3, "Casual spots for coffee and light meals", "☕", "Cafe", 3 },
-                    { 4, "Venues for dancing and late-night entertainment", "🌃", "Nightclub", 4 },
-                    { 5, "Casual venues with food, drinks, and often live music", "🍺", "Pub", 5 },
-                    { 6, "Venues producing wine, offering tastings, food pairings, and live music", "🍷", "Winery", 6 },
-                    { 7, "Venues brewing their own beer, often with food and live music", "🍻", "Brewery", 7 },
-                    { 8, "Sophisticated venues with cocktails, small plates, and live music", "🛋️", "Lounge", 8 },
-                    { 9, "Intimate dining venues with quality food, wine, and occasional live music", "🥂", "Bistro", 9 }
-                });
-
-            migrationBuilder.InsertData(
-                table: "venue_roles",
-                columns: new[] { "id", "description", "name" },
-                values: new object[,]
-                {
-                    { 1, "Full control over venue settings, staff, and content", "venue-owner" },
-                    { 2, "Can manage venue content, specials, and view reports", "venue-manager" },
-                    { 3, "Can update specials and business hours", "venue-staff" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -478,9 +436,9 @@ namespace Application.Services.DatabaseMigrations.Migrations
                 column: "venue_id");
 
             migrationBuilder.CreateIndex(
-                name: "ix_users_email",
+                name: "ix_users_email_address",
                 table: "users",
-                column: "email",
+                column: "email_address",
                 unique: true);
 
             migrationBuilder.CreateIndex(
@@ -491,7 +449,7 @@ namespace Application.Services.DatabaseMigrations.Migrations
             migrationBuilder.CreateIndex(
                 name: "ix_users_sub",
                 table: "users",
-                column: "sub",
+                column: "name_identifier",
                 unique: true);
 
             migrationBuilder.CreateIndex(

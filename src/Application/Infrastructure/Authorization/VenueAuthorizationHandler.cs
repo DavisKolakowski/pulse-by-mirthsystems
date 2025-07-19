@@ -63,7 +63,7 @@ public class VenueAuthorizationHandler : AuthorizationHandler<OperationAuthoriza
             return;
         }
 
-        var user = await _usersRepository.GetUserBySubAsync(userSub);
+        var user = await _usersRepository.GetUserByNameIdentifierAsync(userSub);
         if (user == null)
         {
             context.Fail();

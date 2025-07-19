@@ -13,7 +13,7 @@ public class VenueUserRoleRepository : IVenueUserRoleRepository
     {
         _context = context;
     }
-    public async Task<VenueUserRoleEntity?> GetVenueRoleForUserAsync(long userId, long venueId, CancellationToken cancellationToken = default)
+    public async Task<VenueUserRoleEntity?> GetVenueRoleForUserAsync(Guid userId, Guid venueId, CancellationToken cancellationToken = default)
     {
         return await _context.VenueUserRoles
             .Include(vur => vur.Role)

@@ -4,10 +4,12 @@ using Application.Domain.Entities;
 
 namespace Application.Infrastructure.Data.Configurations;
 
-public class VenueEntityConfiguration : IEntityTypeConfiguration<VenueEntity>
+public class VenueEntityConfiguration : EntityBaseConfiguration<VenueEntity>
 {
-    public void Configure(EntityTypeBuilder<VenueEntity> builder)
+    public override void Configure(EntityTypeBuilder<VenueEntity> builder)
     {
+        base.Configure(builder);
+
         builder.HasIndex(v => v.Name)
                .HasDatabaseName("ix_venues_name");
         builder.HasIndex(v => v.Location)
@@ -19,8 +21,6 @@ public class VenueEntityConfiguration : IEntityTypeConfiguration<VenueEntity>
                .HasDatabaseName("ix_venues_is_active");
         builder.HasIndex(v => new { v.IsActive, v.CategoryId })
                .HasDatabaseName("ix_venues_active_category");
-
-        builder.HasKey(v => v.Id);
 
         builder.HasOne(v => v.Category)
                .WithMany(vc => vc.Venues)

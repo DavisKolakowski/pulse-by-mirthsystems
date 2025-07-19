@@ -8,14 +8,11 @@ using NodaTime;
 namespace Application.Domain.Entities;
 
 [Table("special_menu_schedules")]
-public class SpecialMenuScheduleEntity
+public class SpecialMenuScheduleEntity : EntityBase
 {
-    [Column("id")]
-    public long Id { get; set; }
-
     [Column("special_menu_id")]
     [Required]
-    public long SpecialMenuId { get; set; }
+    public Guid SpecialMenuId { get; set; }
 
     [Column("start_date")]
     [Required]

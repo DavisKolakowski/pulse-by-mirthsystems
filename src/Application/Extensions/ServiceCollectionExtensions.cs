@@ -25,6 +25,12 @@ namespace Application.Extensions;
 
 public static class ServiceCollectionExtensions
 {
+    public static IServiceCollection RegisterClock(this IServiceCollection services)
+    {
+        services.AddSingleton<IClock>(SystemClock.Instance);
+        return services;
+    }
+
     public static IServiceCollection ConfigureSerilog(this IServiceCollection services)
     {
         var loggerConfiguration = new LoggerConfiguration()

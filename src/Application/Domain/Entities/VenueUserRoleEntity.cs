@@ -5,26 +5,24 @@ using NodaTime;
 namespace Application.Domain.Entities;
 
 [Table("venue_user_roles")]
-public class VenueUserRoleEntity
+public class VenueUserRoleEntity : EntityBase
 {
-    [Column("id")]
-    public long Id { get; set; }
 
     [Column("user_id")]
     [Required]
-    public long UserId { get; set; }
+    public Guid UserId { get; set; }
 
     [Column("venue_id")]
     [Required]
-    public long VenueId { get; set; }
+    public Guid VenueId { get; set; }
 
     [Column("role_id")]
     [Required]
-    public int RoleId { get; set; }
+    public Guid RoleId { get; set; }
 
     [Column("granted_by_user_id")]
     [Required]
-    public long GrantedByUserId { get; set; }
+    public Guid GrantedByUserId { get; set; }
 
     [Column("granted_at")]
     public Instant GrantedAt { get; set; }

@@ -4,11 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Application.Domain.Entities;
 
 [Table("special_categories")]
-public class SpecialCategoryEntity
+public class SpecialCategoryEntity : EntityBase
 {
-    [Column("id")]
-    public int Id { get; set; }
-
     [Column("name")]
     [Required]
     [MaxLength(50)]

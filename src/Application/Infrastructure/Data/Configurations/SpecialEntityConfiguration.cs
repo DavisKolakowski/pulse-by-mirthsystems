@@ -4,10 +4,12 @@ using Application.Domain.Entities;
 
 namespace Application.Infrastructure.Data.Configurations;
 
-public class SpecialEntityConfiguration : IEntityTypeConfiguration<SpecialEntity>
+public class SpecialEntityConfiguration : EntityBaseConfiguration<SpecialEntity>
 {
-    public void Configure(EntityTypeBuilder<SpecialEntity> builder)
+    public override void Configure(EntityTypeBuilder<SpecialEntity> builder)
     {
+        base.Configure(builder);
+
         builder.HasIndex(s => s.VenueId)
                .HasDatabaseName("ix_specials_venue_id");
         builder.HasIndex(s => s.SpecialCategoryId)
@@ -16,8 +18,6 @@ public class SpecialEntityConfiguration : IEntityTypeConfiguration<SpecialEntity
                .HasDatabaseName("ix_specials_is_active");
         builder.HasIndex(s => new { s.VenueId, s.IsActive })
                .HasDatabaseName("ix_specials_venue_active");
-
-        builder.HasKey(s => s.Id);
 
         builder.HasOne(s => s.Venue)
                .WithMany(v => v.Specials)

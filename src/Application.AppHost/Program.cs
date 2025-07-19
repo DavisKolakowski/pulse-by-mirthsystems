@@ -37,7 +37,7 @@ internal class Program
         var db = postgres.AddDatabase("application-db");
 
         var databaseMigrations =
-            builder.AddProject<Projects.Application_Services_DatabaseMigrations>("database-migrations")
+            builder.AddProject<Projects.Application_Services_DatabaseInitializer>("database-initializer")
                    .WithReference(db)
                    .WaitFor(db);
 

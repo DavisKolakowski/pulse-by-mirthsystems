@@ -10,5 +10,5 @@ namespace Application.Contracts.Repositories;
 
 public interface IVenueUserRoleRepository
 {
-    Task<VenueUserRoleEntity?> GetVenueRoleForUserAsync(long userId, long venueId, CancellationToken cancellationToken = default);
+    Task<VenueUserRoleEntity?> GetVenueRoleForUserAsync(Guid userId, Guid venueId, CancellationToken cancellationToken = default);
 }

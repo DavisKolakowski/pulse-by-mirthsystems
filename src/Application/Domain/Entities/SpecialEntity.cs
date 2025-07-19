@@ -11,16 +11,13 @@ using NodaTime;
 namespace Application.Domain.Entities;
 
 [Table("specials")]
-public class SpecialEntity
+public class SpecialEntity : EntityBase
 {
-    [Column("id")]
-    public long Id { get; set; }
-
     [Column("venue_id")]
-    public long VenueId { get; set; }
+    public Guid VenueId { get; set; }
 
     [Column("special_category_id")]
-    public int SpecialCategoryId { get; set; }
+    public Guid SpecialCategoryId { get; set; }
 
     [Column("description")]
     [Required]
@@ -31,7 +28,7 @@ public class SpecialEntity
     public bool IsActive { get; set; } = true;
 
     [Column("special_menu_id")]
-    public long? SpecialMenuId { get; set; }
+    public Guid? SpecialMenuId { get; set; }
 
     [Column("additional_data", TypeName = "jsonb")]
     public string? AdditionalData { get; set; } // JSONB for category-specific details, e.g., {"items": [{"name": "Wings", "price": 5.99}]}
