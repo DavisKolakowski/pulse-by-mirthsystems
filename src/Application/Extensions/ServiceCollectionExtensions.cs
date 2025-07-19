@@ -1,6 +1,5 @@
 ﻿using Application.Contracts.Repositories;
 using Application.Contracts.Services;
-using Application.Infrastructure.Authorization;
 using Application.Infrastructure.Data.Repositories;
 using Application.Options;
 using Application.Services;
@@ -67,9 +66,6 @@ public static class ServiceCollectionExtensions
     {
         // Register repositories
         RegisterRepositories(services);
-
-
-        services.AddSingleton<IAuthorizationHandler, VenueAuthorizationHandler>();
 
         // TODO: Register other infrastructure services here
         // services.AddScoped<IFileStorageService, LocalFileStorageService>();

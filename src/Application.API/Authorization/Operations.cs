@@ -1,42 +1,33 @@
-﻿using System.Security.Claims;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Authorization.Infrastructure;
 
-using Application.Contracts.Repositories;
-using Application.Domain.Entities;
-
-using Azure;
-
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Authorization.Infrastructure;
-
-namespace Application.Infrastructure.Authorization;
+namespace Application.API.Authorization;
 
 public static class Operations
 {
     public static class Venue
     {
         public static OperationAuthorizationRequirement Create = new OperationAuthorizationRequirement
-        { 
-            Name = "venue:create" 
+        {
+            Name = "venue:create"
         };
         public static OperationAuthorizationRequirement Access = new OperationAuthorizationRequirement
-        { 
-            Name = "venue:access" 
+        {
+            Name = "venue:access"
         };
         public static OperationAuthorizationRequirement Update = new OperationAuthorizationRequirement
-        { 
-            Name = "venue:update" 
+        {
+            Name = "venue:update"
         };
         public static OperationAuthorizationRequirement Activate = new OperationAuthorizationRequirement
-        { 
+        {
             Name = "venue:activate"
         };
         public static OperationAuthorizationRequirement Deactivate = new OperationAuthorizationRequirement
-        { 
+        {
             Name = "venue:deactivate"
         };
         public static OperationAuthorizationRequirement Delete = new OperationAuthorizationRequirement
-        { 
+        {
             Name = "venue:delete"
         };
 
