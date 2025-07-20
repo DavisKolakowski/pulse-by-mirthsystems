@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace Application.Enums;
 
-public enum SortOrderFilterSelections
+public enum SearchVenuesSortByFilterSelections
 {
-    Ascending,
-    Descending
+    Name,
+    CreatedAt,
+    Locality,
+    Region,
+    Status
 }

@@ -17,7 +17,10 @@ public class VenueSearchQuery : PagedQuery
 
     public List<Guid> CategoryIds { get; set; } = new List<Guid>();
 
-    public VenueStatusFilterSelections Status { get; set; } = VenueStatusFilterSelections.Active;
+    public SearchVenuesStatusFilterSelections Status { get; set; } = SearchVenuesStatusFilterSelections.Active;
+
+    public SearchVenuesSortByFilterSelections SortBy { get; set; } = SearchVenuesSortByFilterSelections.Name;
+    public SearchSortOrderFilterSelections SortOrder { get; set; } = SearchSortOrderFilterSelections.Ascending;
 
     public Guid? UserId { get; set; }
 }

@@ -18,6 +18,6 @@ public class SpecialMenuSearchQuery : PagedQuery
     public List<Guid> VenueCategoryIds { get; set; } = new List<Guid>();
     public bool CurrentlyRunning { get; set; } = true;
 
-    public SpecialMenuSortByFilterSelections SortBy { get; set; } = SpecialMenuSortByFilterSelections.Distance;
-    public SortOrderFilterSelections SortOrder { get; set; } = SortOrderFilterSelections.Ascending;
+    public SearchSpecialMenusSortByFilterSelections SortBy { get; set; } = SearchSpecialMenusSortByFilterSelections.Distance;
+    public SearchSortOrderFilterSelections SortOrder { get; set; } = SearchSortOrderFilterSelections.Ascending;
 }

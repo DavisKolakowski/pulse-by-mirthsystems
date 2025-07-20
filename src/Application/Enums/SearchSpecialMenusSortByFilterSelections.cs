@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace Application.Enums;
 
-public enum VenueStatusFilterSelections
+public enum SearchSpecialMenusSortByFilterSelections
 {
-    Active,
-    All,
-    Inactive
+    Distance,
+    ItemCount
 }
