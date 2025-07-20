@@ -26,7 +26,6 @@ public static class VenueQueryExtensions
         return query
             .Include(v => v.PrimaryCategory)
             .Include(v => v.SecondaryCategory)
-            .Include(v => v.Specials)
             .ApplyFilters(searchQuery)
             .ApplySorting(searchQuery.SortBy, searchQuery.SortOrder);
     }

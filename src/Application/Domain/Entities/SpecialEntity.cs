@@ -6,9 +6,6 @@ namespace Application.Domain.Entities;
 [Table("specials")]
 public class SpecialEntity : EntityBase
 {
-    [Column("venue_id")]
-    public Guid VenueId { get; set; }
-
     [Column("special_category_id")]
     public Guid SpecialCategoryId { get; set; }
 
@@ -21,7 +18,7 @@ public class SpecialEntity : EntityBase
     public bool IsActive { get; set; } = true;
 
     [Column("special_menu_id")]
-    public Guid? SpecialMenuId { get; set; }
+    public Guid SpecialMenuId { get; set; }
 
     [Column("additional_data", TypeName = "jsonb")]
     public string? AdditionalData { get; set; } // JSONB for category-specific details, e.g., {"items": [{"name": "Wings", "price": 5.99}]}

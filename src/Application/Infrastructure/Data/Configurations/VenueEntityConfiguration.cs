@@ -38,10 +38,6 @@ public class VenueEntityConfiguration : EntityBaseConfiguration<VenueEntity>
                .WithOne(bh => bh.Venue)
                .HasForeignKey(bh => bh.VenueId)
                .OnDelete(DeleteBehavior.Cascade);
-        builder.HasMany(v => v.Specials)
-               .WithOne(s => s.Venue)
-               .HasForeignKey(s => s.VenueId)
-               .OnDelete(DeleteBehavior.Cascade);
         builder.HasMany(v => v.SpecialMenus)
                .WithOne(sm => sm.Venue)
                .HasForeignKey(sm => sm.VenueId)

@@ -91,7 +91,6 @@ public class VenueEntity : EntityBase
     public VenueCategoryEntity PrimaryCategory { get; set; } = null!;
     public VenueCategoryEntity? SecondaryCategory { get; set; }
     public List<BusinessHoursEntity> BusinessHours { get; set; } = new List<BusinessHoursEntity>();
-    public List<SpecialEntity> Specials { get; set; } = new List<SpecialEntity>();
     public List<SpecialMenuEntity> SpecialMenus { get; set; } = new List<SpecialMenuEntity>();
     public List<VenueUserRoleEntity> VenueUsers { get; set; } = new List<VenueUserRoleEntity>();
     public List<VenueInvitationEntity> VenueInvitations { get; set; } = new List<VenueInvitationEntity>();
