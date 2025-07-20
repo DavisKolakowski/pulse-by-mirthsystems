@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using NodaTime;
+﻿using NodaTime;
 
 namespace Application.Domain.Entities;
 

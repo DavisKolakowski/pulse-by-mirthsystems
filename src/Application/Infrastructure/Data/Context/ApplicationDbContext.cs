@@ -67,7 +67,6 @@ public sealed class ApplicationDbContext : DbContext
     }
     public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
-        var now = _clock.GetCurrentInstant().ToDateTimeUtc();
         foreach (var entry in ChangeTracker.Entries<EntityBase>())
         {
             switch (entry.State)
