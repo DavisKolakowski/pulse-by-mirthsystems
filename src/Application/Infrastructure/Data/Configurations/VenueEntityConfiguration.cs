@@ -15,17 +15,21 @@ public class VenueEntityConfiguration : EntityBaseConfiguration<VenueEntity>
         builder.HasIndex(v => v.Location)
                .HasMethod("GIST")
                .HasDatabaseName("ix_venues_location");
-        builder.HasIndex(v => v.CategoryId)
+        builder.HasIndex(v => v.PrimaryCategoryId)
                .HasDatabaseName("ix_venues_category_id");
         builder.HasIndex(v => v.IsActive)
                .HasDatabaseName("ix_venues_is_active");
-        builder.HasIndex(v => new { v.IsActive, v.CategoryId })
+        builder.HasIndex(v => new { v.IsActive, v.PrimaryCategoryId })
                .HasDatabaseName("ix_venues_active_category");
 
-        builder.HasOne(v => v.Category)
-               .WithMany(vc => vc.Venues)
-               .HasForeignKey(v => v.CategoryId)
+        builder.HasOne(v => v.PrimaryCategory)
+               .WithMany(vc => vc.PrimaryVenues)
+               .HasForeignKey(v => v.PrimaryCategoryId)
                .OnDelete(DeleteBehavior.Restrict);
+        builder.HasOne(e => e.SecondaryCategory)
+               .WithMany(c => c.SecondaryVenues)
+               .HasForeignKey(e => e.SecondaryCategoryId)
+               .OnDelete(DeleteBehavior.SetNull);
         builder.HasMany(v => v.BusinessHours)
                .WithOne(bh => bh.Venue)
                .HasForeignKey(bh => bh.VenueId)

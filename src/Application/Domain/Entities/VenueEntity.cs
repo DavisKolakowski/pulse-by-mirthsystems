@@ -9,8 +9,11 @@ namespace Application.Domain.Entities;
 [Table("venues")]
 public class VenueEntity : EntityBase
 {
-    [Column("category_id")]
-    public Guid CategoryId { get; set; }
+    [Column("primary_category_id")]
+    public Guid PrimaryCategoryId { get; set; }
+
+    [Column("secondary_category_id")]
+    public Guid? SecondaryCategoryId { get; set; }
 
     [Column("name")]
     [Required]
@@ -78,7 +81,8 @@ public class VenueEntity : EntityBase
     [DefaultValue(true)]
     public bool IsActive { get; set; }
 
-    public VenueCategoryEntity Category { get; set; } = null!;
+    public VenueCategoryEntity PrimaryCategory { get; set; } = null!;
+    public VenueCategoryEntity? SecondaryCategory { get; set; }
     public List<BusinessHoursEntity> BusinessHours { get; set; } = new List<BusinessHoursEntity>();
     public List<SpecialEntity> Specials { get; set; } = new List<SpecialEntity>();
     public List<SpecialMenuEntity> SpecialMenus { get; set; } = new List<SpecialMenuEntity>();

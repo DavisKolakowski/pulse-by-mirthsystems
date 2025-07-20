@@ -22,5 +22,6 @@ public class VenueCategoryEntity : EntityBase
     [Column("sort_order")]
     public int SortOrder { get; set; }
 
-    public List<VenueEntity> Venues { get; set; } = new List<VenueEntity>();
+    public List<VenueEntity> PrimaryVenues { get; set; } = new List<VenueEntity>();
+    public List<VenueEntity> SecondaryVenues { get; set; } = new List<VenueEntity>();
 }
