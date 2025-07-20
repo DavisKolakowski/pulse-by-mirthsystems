@@ -16,7 +16,11 @@ public class VenueEntityConfiguration : EntityBaseConfiguration<VenueEntity>
                .HasMethod("GIST")
                .HasDatabaseName("ix_venues_location");
         builder.HasIndex(v => v.PrimaryCategoryId)
-               .HasDatabaseName("ix_venues_category_id");
+               .HasDatabaseName("ix_venues_primary_category_id");
+        builder.HasIndex(e => e.SecondaryCategoryId)
+               .HasDatabaseName("ix_venues_secondary_category_id");
+        builder.HasIndex(e => e.TimeZoneId)
+               .HasDatabaseName("ix_venues_time_zone_id");
         builder.HasIndex(v => v.IsActive)
                .HasDatabaseName("ix_venues_is_active");
         builder.HasIndex(v => new { v.IsActive, v.PrimaryCategoryId })

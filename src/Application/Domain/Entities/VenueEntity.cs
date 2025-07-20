@@ -2,6 +2,8 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
+using Azure.Maps.TimeZones;
+
 using NetTopologySuite.Geometries;
 
 namespace Application.Domain.Entities;
@@ -76,6 +78,11 @@ public class VenueEntity : EntityBase
     [Column("location", TypeName = "geography (point)")]
     [Required]
     public Point Location { get; set; } = null!;
+
+    [Column("time_zone_id")]
+    [Required]
+    [MaxLength(32)]
+    public string TimeZoneId { get; set; } = null!; // IANA ID, e.g., "America/New_York"
 
     [Column("is_active")]
     [DefaultValue(true)]
