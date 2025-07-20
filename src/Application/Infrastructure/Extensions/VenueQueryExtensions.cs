@@ -16,46 +16,41 @@ public static class VenueQueryExtensions
     {
         var searchQuery = new VenueSearchQuery();
         configureQuery(searchQuery);
-        return query.Search(searchQuery);
-    }
 
-    public static IQueryable<VenueEntity> Search(
-        this IQueryable<VenueEntity> query,
-        VenueSearchQuery searchQuery)
-    {
         return query
             .Include(v => v.PrimaryCategory)
             .Include(v => v.SecondaryCategory)
+            .Include(v => v.SpecialMenus)
+                .ThenInclude(sm => sm.Specials)
             .ApplyFilters(searchQuery)
             .ApplySorting(searchQuery.SortBy, searchQuery.SortOrder);
     }
 
     public static IQueryable<VenueEntity> WithinArea(
         this IQueryable<VenueEntity> query,
-        Geometry searchArea)
+        VenuesWithinAreaQuery searchQuery)
     {
-        return query.Where(v => v.Location.Within(searchArea));
+        return query.Where(v => v.Location.Within(searchQuery.SearchArea));
     }
 
     public static IQueryable<VenueEntity> ByUser(
         this IQueryable<VenueEntity> query,
-        Guid userId)
+        VenuesByUserQuery searchQuery)
     {
         return query.Where(v => v.VenueUsers.Any(vu =>
-            vu.UserId == userId &&
+            vu.UserId == searchQuery.UserId &&
             vu.IsActive));
     }
 
     public static async Task<bool> UserHasAccessAsync(
         this IQueryable<VenueEntity> query,
-        Guid venueId,
-        Guid userId,
+        UserHasVenueAccessQuery searchQuery,
         CancellationToken cancellationToken = default)
     {
         return await query
-            .Where(v => v.Id == venueId)
+            .Where(v => v.Id == searchQuery.VenueId)
             .AnyAsync(v => v.VenueUsers.Any(vu =>
-                vu.UserId == userId &&
+                vu.UserId == searchQuery.UserId &&
                 vu.IsActive),
                 cancellationToken);
     }
@@ -73,6 +68,16 @@ public static class VenueQueryExtensions
             .Include(v => v.SpecialMenus)
                 .ThenInclude(sm => sm.Specials)
                     .ThenInclude(s => s.Category);
+    }
+
+    public static async Task<VenueEntity?> GetWithDetailsAsync(
+        this IQueryable<VenueEntity> query,
+        GetVenueWithDetailsQuery searchQuery,
+        CancellationToken cancellationToken = default)
+    {
+        return await query
+            .WithFullDetails()
+            .FirstOrDefaultAsync(v => v.Id == searchQuery.VenueId, cancellationToken);
     }
 
     private static IQueryable<VenueEntity> ApplyFilters(
@@ -114,7 +119,9 @@ public static class VenueQueryExtensions
 
         if (searchQuery.UserId.HasValue)
         {
-            query = query.ByUser(searchQuery.UserId.Value);
+            query = query.Where(v => v.VenueUsers.Any(vu =>
+                vu.UserId == searchQuery.UserId.Value &&
+                vu.IsActive));
         }
 
         return query;

@@ -1,28 +1,26 @@
 ﻿using System.Security.Claims;
 
-using Application.Contracts.Repositories;
-using Application.Domain.Entities;
+using Application.Infrastructure.Data.Context;
+using Application.Infrastructure.Extensions;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authorization.Infrastructure;
 
 namespace Application.API.Authorization.Handlers;
 
-public class VenueAuthorizationHandler : AuthorizationHandler<OperationAuthorizationRequirement, VenueEntity>
+public class VenueAuthorizationHandler : AuthorizationHandler<OperationAuthorizationRequirement, Guid>
 {
-    private readonly IUserRepository _usersRepository;
-    private readonly IVenueUserRoleRepository _venueUserRoleRepository;
+    private readonly ApplicationDbContext _dbContext;
 
-    public VenueAuthorizationHandler(IUserRepository usersRepository, IVenueUserRoleRepository venueUserRoleRepository)
+    public VenueAuthorizationHandler(ApplicationDbContext dbContext)
     {
-        _usersRepository = usersRepository;
-        _venueUserRoleRepository = venueUserRoleRepository;
+        _dbContext = dbContext;
     }
 
     protected override async Task HandleRequirementAsync(
         AuthorizationHandlerContext context,
         OperationAuthorizationRequirement requirement,
-        VenueEntity resource)
+        Guid venueId)
     {
         var userSub = context.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
         if (string.IsNullOrEmpty(userSub))
@@ -60,14 +58,23 @@ public class VenueAuthorizationHandler : AuthorizationHandler<OperationAuthoriza
             return;
         }
 
-        var user = await _usersRepository.GetUserByNameIdentifierAsync(userSub);
+        var user = await _dbContext.Users.GetByNameIdentifierAsync(q =>
+        {
+            q.NameIdentifier = userSub;
+        });
+
         if (user == null)
         {
             context.Fail();
             return;
         }
 
-        var userRole = await _venueUserRoleRepository.GetVenueRoleForUserAsync(user.Id, resource.Id);
+        var userRole = await _dbContext.VenueUserRoles.GetForUserAndVenueAsync(q =>
+        {
+            q.UserId = user.Id;
+            q.VenueId = venueId;
+        });
+
         if (userRole == null || !userRole.IsActive)
         {
             context.Fail();

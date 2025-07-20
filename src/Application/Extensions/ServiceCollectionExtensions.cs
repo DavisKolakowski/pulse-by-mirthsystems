@@ -1,6 +1,4 @@
-﻿using Application.Contracts.Repositories;
-using Application.Contracts.Services;
-using Application.Infrastructure.Data.Repositories;
+﻿using Application.Contracts.Services;
 using Application.Options;
 using Application.Services;
 
@@ -65,17 +63,10 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection RegisterInfrastructureServices(this IServiceCollection services)
     {
         // Register repositories
-        RegisterRepositories(services);
 
         // TODO: Register other infrastructure services here
         // services.AddScoped<IFileStorageService, LocalFileStorageService>();
         // services.AddScoped<INotificationService, SignalRNotificationService>();
         return services;
-    }
-
-    private static void RegisterRepositories(IServiceCollection services)
-    {
-        services.AddScoped<IUserRepository, UserRepository>();
-        services.AddScoped<IVenueUserRoleRepository, VenueUserRoleRepository>();
     }
 }

@@ -4,8 +4,6 @@ using Application.Enums;
 
 using Microsoft.EntityFrameworkCore;
 
-using NetTopologySuite.Geometries;
-
 namespace Application.Infrastructure.Extensions;
 
 public static class SpecialMenuQueryExtensions
@@ -16,13 +14,6 @@ public static class SpecialMenuQueryExtensions
     {
         var searchQuery = new SpecialMenuSearchQuery();
         configureQuery(searchQuery);
-        return query.Search(searchQuery);
-    }
-
-    public static IQueryable<SpecialMenuEntity> Search(
-        this IQueryable<SpecialMenuEntity> query,
-        SpecialMenuSearchQuery searchQuery)
-    {
         query = query
             .Include(sm => sm.Venue)
             .Where(sm => sm.Venue.Location.Within(searchQuery.SearchArea));
@@ -57,12 +48,14 @@ public static class SpecialMenuQueryExtensions
 
     public static IQueryable<SpecialMenuEntity> ByVenue(
         this IQueryable<SpecialMenuEntity> query,
-        Guid venueId,
-        bool includeInactive = false)
+        Action<SpecialMenusByVenueQuery> configureQuery)
     {
-        query = query.Where(sm => sm.VenueId == venueId);
+        var searchQuery = new SpecialMenusByVenueQuery();
+        configureQuery(searchQuery);
 
-        if (!includeInactive)
+        query = query.Where(sm => sm.VenueId == searchQuery.VenueId);
+
+        if (!searchQuery.IncludeInactive)
         {
             query = query.Where(sm => sm.Schedules.Any(s => s.IsActive));
         }
@@ -81,6 +74,19 @@ public static class SpecialMenuQueryExtensions
             .Include(sm => sm.Schedules)
             .Include(sm => sm.Specials)
                 .ThenInclude(s => s.Category);
+    }
+
+    public static Task<SpecialMenuEntity?> GetWithDetailsAsync(
+        this IQueryable<SpecialMenuEntity> query,
+        Action<GetSpecialMenuDetailsQuery> configureQuery,
+        CancellationToken cancellationToken = default)
+    {
+        var searchQuery = new GetSpecialMenuDetailsQuery();
+        configureQuery(searchQuery);
+
+        return query
+            .WithDetails()
+            .FirstOrDefaultAsync(sm => sm.Id == searchQuery.SpecialMenuId, cancellationToken);
     }
 
     private static IQueryable<SpecialMenuEntity> ApplyFilters(
