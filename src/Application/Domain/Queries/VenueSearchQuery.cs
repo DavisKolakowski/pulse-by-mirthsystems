@@ -8,7 +8,7 @@ using Application.Enums;
 
 namespace Application.Domain.Queries;
 
-public class VenueSearchQuery : PagedQuery
+public class VenueSearchQuery
 {
     public string? SearchTerm { get; set; }
 

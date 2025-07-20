@@ -6,9 +6,9 @@ using NodaTime;
 
 namespace Application.Domain.Queries;
 
-public class SpecialMenuSearchQuery : PagedQuery
+public class SpecialMenuSearchQuery
 {
-    public required Geometry SearchArea { get; set; }
+    public Geometry SearchArea { get; set; } = null!;
 
     public string? SearchTerm { get; set; }
     public LocalDate? SearchDate { get; set; }
