@@ -1,6 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
+using Application.Domain.Common;
+
 using NodaTime;
 
 namespace Application.Domain.Entities;
