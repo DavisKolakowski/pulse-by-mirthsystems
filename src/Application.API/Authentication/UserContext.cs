@@ -1,8 +1,6 @@
 ﻿using System.Security.Authentication;
 using System.Security.Claims;
 
-using Application.Domain.Entities;
-
 namespace Application.API.Authentication;
 
 public class UserContext

@@ -1,10 +1,10 @@
-﻿using Application.Entities;
+﻿using Application.Data.Queries;
+using Application.Entities;
 using Application.Enums;
-using Application.Queries;
 
 using Microsoft.EntityFrameworkCore;
 
-namespace Application.Infrastructure.Extensions;
+namespace Application.Data.Extensions;
 
 public static class SpecialMenuQueryExtensions
 {
@@ -98,7 +98,7 @@ public static class SpecialMenuQueryExtensions
             var searchTerm = searchQuery.SearchTerm.ToLower();
             query = query.Where(sm =>
                 sm.Name.ToLower().Contains(searchTerm) ||
-                (sm.Description != null && sm.Description.ToLower().Contains(searchTerm)) ||
+                sm.Description != null && sm.Description.ToLower().Contains(searchTerm) ||
                 sm.Specials.Any(s => s.Description.ToLower().Contains(searchTerm)));
         }
 
@@ -112,8 +112,8 @@ public static class SpecialMenuQueryExtensions
         {
             query = query.Where(sm =>
                 searchQuery.VenueCategoryIds.Contains(sm.Venue.PrimaryCategoryId) ||
-                (sm.Venue.SecondaryCategoryId.HasValue &&
-                 searchQuery.VenueCategoryIds.Contains(sm.Venue.SecondaryCategoryId.Value)));
+                sm.Venue.SecondaryCategoryId.HasValue &&
+                 searchQuery.VenueCategoryIds.Contains(sm.Venue.SecondaryCategoryId.Value));
         }
 
         query = query.Where(sm => sm.Schedules.Any(s => s.IsActive));

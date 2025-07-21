@@ -2,7 +2,7 @@
 
 using Microsoft.EntityFrameworkCore;
 
-namespace Application.Infrastructure.Extensions;
+namespace Application.Data.Extensions;
 
 public static class VenueRoleQueryExtensions
 {

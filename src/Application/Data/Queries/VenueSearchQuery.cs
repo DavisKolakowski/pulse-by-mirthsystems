@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using Application.Enums;
 
-namespace Application.Queries;
+namespace Application.Data.Queries;
 
 public class VenueSearchQuery
 {

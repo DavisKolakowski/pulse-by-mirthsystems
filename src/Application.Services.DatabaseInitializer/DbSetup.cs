@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading;
 
+using Application.Data;
 using Application.Domain.Entities;
-using Application.Infrastructure.Data.Context;
 using Application.Services.DatabaseInitializer.Options;
 
 using Microsoft.EntityFrameworkCore;

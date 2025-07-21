@@ -1,9 +1,9 @@
-﻿using Application.Entities;
-using Application.Queries;
+﻿using Application.Data.Queries;
+using Application.Entities;
 
 using Microsoft.EntityFrameworkCore;
 
-namespace Application.Infrastructure.Extensions;
+namespace Application.Data.Extensions;
 
 public static class SpecialQueryExtensions
 {

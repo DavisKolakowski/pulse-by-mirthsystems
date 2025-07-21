@@ -1,4 +1,4 @@
-﻿using Application.Domain.Entities;
+﻿using Application.Entities;
 using Application.Services.DatabaseInitializer.Models;
 
 namespace Application.Services.DatabaseInitializer.Utilities;

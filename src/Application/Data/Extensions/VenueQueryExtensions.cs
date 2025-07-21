@@ -1,12 +1,12 @@
-﻿using Application.Entities;
+﻿using Application.Data.Queries;
+using Application.Entities;
 using Application.Enums;
-using Application.Queries;
 
 using Microsoft.EntityFrameworkCore;
 
 using NetTopologySuite.Geometries;
 
-namespace Application.Infrastructure.Extensions;
+namespace Application.Data.Extensions;
 
 public static class VenueQueryExtensions
 {
@@ -89,7 +89,7 @@ public static class VenueQueryExtensions
             var searchTerm = searchQuery.SearchTerm.ToLower();
             query = query.Where(v =>
                 v.Name.ToLower().Contains(searchTerm) ||
-                (v.Description != null && v.Description.ToLower().Contains(searchTerm)) ||
+                v.Description != null && v.Description.ToLower().Contains(searchTerm) ||
                 v.StreetAddress.ToLower().Contains(searchTerm));
         }
 
@@ -107,7 +107,7 @@ public static class VenueQueryExtensions
         {
             query = query.Where(v =>
                 searchQuery.CategoryIds.Contains(v.PrimaryCategoryId) ||
-                (v.SecondaryCategoryId.HasValue && searchQuery.CategoryIds.Contains(v.SecondaryCategoryId.Value)));
+                v.SecondaryCategoryId.HasValue && searchQuery.CategoryIds.Contains(v.SecondaryCategoryId.Value));
         }
 
         query = searchQuery.Status switch

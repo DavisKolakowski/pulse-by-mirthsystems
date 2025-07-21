@@ -4,7 +4,7 @@ using NetTopologySuite.Geometries;
 
 using NodaTime;
 
-namespace Application.Queries;
+namespace Application.Data.Queries;
 
 public class SpecialMenuSearchQuery
 {

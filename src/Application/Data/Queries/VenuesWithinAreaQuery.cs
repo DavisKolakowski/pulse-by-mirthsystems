@@ -1,6 +1,6 @@
 ﻿using NetTopologySuite.Geometries;
 
-namespace Application.Queries;
+namespace Application.Data.Queries;
 
 public class VenuesWithinAreaQuery
 {

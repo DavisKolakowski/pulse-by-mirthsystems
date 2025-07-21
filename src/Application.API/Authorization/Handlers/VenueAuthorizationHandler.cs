@@ -1,7 +1,7 @@
 ﻿using System.Security.Claims;
 
-using Application.Infrastructure.Data.Context;
-using Application.Infrastructure.Extensions;
+using Application.Data;
+using Application.Data.Extensions;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authorization.Infrastructure;
