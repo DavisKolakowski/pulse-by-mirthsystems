@@ -2,6 +2,9 @@ using Application.API.Authorization.Handlers;
 
 using Microsoft.AspNetCore.Authorization;
 
+using NodaTime;
+using NodaTime.Serialization.SystemTextJson;
+
 namespace Application.API;
 
 public class Program
@@ -31,6 +34,13 @@ public class Program
                                     options.RequireHttpsMetadata = false;
                                 }
                             });
+
+        builder.Services.ConfigureHttpJsonOptions(options =>
+        {
+            // Configure NodaTime JSON serialization
+            options.SerializerOptions.ConfigureForNodaTime(DateTimeZoneProviders.Tzdb);
+            options.SerializerOptions.DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull;
+        });
 
         var app = builder.Build();
 

@@ -23,7 +23,6 @@ public class SpecialEntity : EntityBase
     [Column("additional_data", TypeName = "jsonb")]
     public string? AdditionalData { get; set; } // JSONB for category-specific details, e.g., {"items": [{"name": "Wings", "price": 5.99}]}
 
-    public VenueEntity Venue { get; set; } = null!;
     public SpecialCategoryEntity Category { get; set; } = null!;
     public SpecialMenuEntity? SpecialMenu { get; set; }
 }
