@@ -1,3 +1,6 @@
+using System.Text.Json;
+using System.Text.Json.Serialization;
+
 using Application.API.Authorization.Handlers;
 
 using Microsoft.AspNetCore.Authorization;
@@ -37,9 +40,10 @@ public class Program
 
         builder.Services.ConfigureHttpJsonOptions(options =>
         {
-            // Configure NodaTime JSON serialization
             options.SerializerOptions.ConfigureForNodaTime(DateTimeZoneProviders.Tzdb);
-            options.SerializerOptions.DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull;
+            options.SerializerOptions.Converters.Add(new JsonStringEnumConverter());
+            options.SerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower;
+            options.SerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
         });
 
         var app = builder.Build();
