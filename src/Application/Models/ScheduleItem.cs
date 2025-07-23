@@ -14,7 +14,7 @@ namespace Application.Models;
 /// <summary>
 /// Schedule information for a special menu
 /// </summary>
-public class SpecialMenuScheduleItem : ItemBase
+public class ScheduleItem : ItemBase
 {
     /// <summary>
     /// The date when this schedule starts

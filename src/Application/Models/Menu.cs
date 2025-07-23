@@ -11,7 +11,7 @@ namespace Application.Models;
 /// <summary>
 /// Special menu for a venue
 /// </summary>
-public class VenueSpecialMenu : ItemBase
+public class Menu : ItemBase
 {
     /// <summary>
     /// The name of this special menu
@@ -37,12 +37,12 @@ public class VenueSpecialMenu : ItemBase
     /// </summary>
     [JsonPropertyName("schedules")]
     [JsonPropertyOrder(3)]
-    public List<SpecialMenuScheduleItem> Schedules { get; set; } = new List<SpecialMenuScheduleItem>();
+    public List<ScheduleItem> Schedules { get; set; } = new List<ScheduleItem>();
 
     /// <summary>
     /// Menu items in this special menu
     /// </summary>
     [JsonPropertyName("menu_items")]
     [JsonPropertyOrder(4)]
-    public List<SpecialMenuItem> MenuItems { get; set; } = new List<SpecialMenuItem>();
+    public List<SpecialItem> Specials { get; set; } = new List<SpecialItem>();
 }

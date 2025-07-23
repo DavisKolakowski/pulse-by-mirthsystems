@@ -12,7 +12,7 @@ namespace Application.Models;
 /// <summary>
 /// Individual special menu item
 /// </summary>
-public class SpecialMenuItem : ItemBase
+public class SpecialItem : ItemBase
 {
     /// <summary>
     /// The description of this special

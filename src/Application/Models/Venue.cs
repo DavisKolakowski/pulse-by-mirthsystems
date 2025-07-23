@@ -24,5 +24,5 @@ public class Venue : VenueItem
     /// </summary>
     [JsonPropertyName("special_menus")]
     [JsonPropertyOrder(21)]
-    public List<VenueSpecialMenu> SpecialMenus { get; set; } = new List<VenueSpecialMenu>();
+    public List<Menu> Menus { get; set; } = new List<Menu>();
 }
