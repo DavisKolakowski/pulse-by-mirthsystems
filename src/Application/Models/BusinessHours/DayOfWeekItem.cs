@@ -1,41 +1,46 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace Application.Models;
+namespace Application.Models.BusinessHours;
 
 
 /// <summary>
-/// Operating schedule for a specific day
+/// Day of week information
 /// </summary>
-public class OperatingSchedule
+public class DayOfWeekItem : ItemBase
 {
     /// <summary>
-    /// Full name of the day
+    /// The name of the day
     /// </summary>
     /// <example>Monday</example>
-    [JsonPropertyName("day_of_week_name")]
+    [Required]
+    [MaxLength(20, ErrorMessage = "Name cannot exceed 20 characters")]
+    [JsonPropertyName("name")]
     [JsonPropertyOrder(1)]
-    public required string DayOfWeekName { get; set; }
+    public required string Name { get; set; }
 
     /// <summary>
-    /// Short name of the day
+    /// The short name of the day
     /// </summary>
-    /// <example>Mon</example>
-    [JsonPropertyName("day_of_week_short_name")]
+    /// <example>MON</example>
+    [Required]
+    [MaxLength(3, ErrorMessage = "Short name cannot exceed 3 characters")]
+    [JsonPropertyName("short_name")]
     [JsonPropertyOrder(2)]
-    public required string DayOfWeekShortName { get; set; }
+    public required string ShortName { get; set; }
 
     /// <summary>
     /// ISO day number (1 = Monday, 7 = Sunday)
     /// </summary>
     /// <example>1</example>
-    [JsonPropertyName("day_of_week_iso_number")]
+    [JsonPropertyName("iso_number")]
     [JsonPropertyOrder(3)]
-    public int DayOfWeekIsoNumber { get; set; }
+    public int IsoNumber { get; set; }
 
     /// <summary>
     /// Indicates if this is a weekday
@@ -46,17 +51,10 @@ public class OperatingSchedule
     public bool IsWeekday { get; set; }
 
     /// <summary>
-    /// Sort order for display
+    /// The sort order for displaying this day
     /// </summary>
-    /// <example>1</example>
+    /// <example>2</example>
     [JsonPropertyName("sort_order")]
     [JsonPropertyOrder(5)]
     public int SortOrder { get; set; }
-
-    /// <summary>
-    /// Business hours for this day
-    /// </summary>
-    [JsonPropertyName("business_hours")]
-    [JsonPropertyOrder(6)]
-    public BusinessHoursItem? BusinessHours { get; set; }
 }
