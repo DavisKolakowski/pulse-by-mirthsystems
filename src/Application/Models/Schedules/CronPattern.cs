@@ -32,4 +32,9 @@ public class CronPattern
     public string Year { get; set; } = "*";
 
     public override string ToString() => string.Join(" ", Seconds, Minutes, Hours, DayOfMonth, Month, DayOfWeek, Year).Trim();
+
+    public CronExpression ToCronExpression()
+    {
+        return CronExpression.Parse(ToString(), CronFormat.IncludeSeconds);
+    }
 }
