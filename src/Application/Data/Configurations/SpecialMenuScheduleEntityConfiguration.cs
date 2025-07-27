@@ -22,33 +22,37 @@ public class SpecialMenuScheduleEntityConfiguration : EntityBaseConfiguration<Sp
                .HasForeignKey(sms => sms.SpecialMenuId)
                .OnDelete(DeleteBehavior.Cascade);
 
-        builder.OwnsOne(sms => sms.RecurrencePattern, rp =>
+        builder.OwnsOne(sms => sms.RecurrenceSettings, rs =>
         {
-            rp.ToJson("recurrence_pattern");
+            rs.ToJson("recurrence_settings");
 
-            rp.Property(p => p.Name)
+            rs.Property(p => p.Name)
               .HasJsonPropertyName("name");
-            rp.Property(p => p.Seconds)
-              .HasJsonPropertyName("seconds")
-              .HasMaxLength(50);
-            rp.Property(p => p.Minutes)
-              .HasJsonPropertyName("minutes")
-              .HasMaxLength(50);
-            rp.Property(p => p.Hours)
-              .HasJsonPropertyName("hours")
-              .HasMaxLength(50);
-            rp.Property(p => p.DayOfMonth)
-              .HasJsonPropertyName("day_of_month")
-              .HasMaxLength(50);
-            rp.Property(p => p.Month)
-              .HasJsonPropertyName("month")
-              .HasMaxLength(50);
-            rp.Property(p => p.DayOfWeek)
-              .HasJsonPropertyName("day_of_week")
-              .HasMaxLength(50);
-            rp.Property(p => p.Year)
-              .HasJsonPropertyName("year")
-              .HasMaxLength(50);
+
+            rs.OwnsOne(p => p.CronPattern, cp =>
+            {
+                cp.Property(c => c.Seconds)
+                  .HasJsonPropertyName("seconds")
+                  .HasMaxLength(50);
+                cp.Property(c => c.Minutes)
+                  .HasJsonPropertyName("minutes")
+                  .HasMaxLength(50);
+                cp.Property(c => c.Hours)
+                  .HasJsonPropertyName("hours")
+                  .HasMaxLength(50);
+                cp.Property(c => c.DayOfMonth)
+                  .HasJsonPropertyName("day_of_month")
+                  .HasMaxLength(50);
+                cp.Property(c => c.Month)
+                  .HasJsonPropertyName("month")
+                  .HasMaxLength(50);
+                cp.Property(c => c.DayOfWeek)
+                  .HasJsonPropertyName("day_of_week")
+                  .HasMaxLength(50);
+                cp.Property(c => c.Year)
+                  .HasJsonPropertyName("year")
+                  .HasMaxLength(50);
+            });
         });
     }
 }

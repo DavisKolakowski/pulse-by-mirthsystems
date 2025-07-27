@@ -33,8 +33,7 @@ public class CreateSpecialMenuSchedule
     [Required(ErrorMessage = "Recurrence option is required")]
     [JsonPropertyName("recurrence_option")]
     [JsonPropertyOrder(2)]
-    [JsonConverter(typeof(JsonStringEnumConverter))]
-    public required RecurrencePatternNames RecurrenceOption { get; set; }
+    public required string RecurrenceOption { get; set; }
 
     /// <summary>
     /// The date when this schedule should start

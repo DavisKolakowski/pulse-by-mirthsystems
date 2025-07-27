@@ -31,4 +31,14 @@
 		<PackageReference Include="Serilog.Sinks.XUnit" Version="3.0.19" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Data\Extensions\" />
+	  <Folder Include="Data\Queries\" />
+	  <Folder Include="Models\Analytics\" />
+	  <Folder Include="Models\BusinessHours\" />
+	  <Folder Include="Models\Location\" />
+	  <Folder Include="Models\Specials\" />
+	  <Folder Include="Models\Venues\" />
+	</ItemGroup>
+
 </Project>

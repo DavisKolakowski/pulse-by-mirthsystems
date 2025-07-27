@@ -34,7 +34,7 @@ public class UpdateSpecialMenuSchedule
     [JsonPropertyName("recurrence_option")]
     [JsonPropertyOrder(1)]
     [JsonConverter(typeof(JsonStringEnumConverter))]
-    public required RecurrencePatternNames RecurrenceOption { get; set; }
+    public required RecurrencePatternName RecurrenceOption { get; set; }
 
     /// <summary>
     /// The updated start date for this schedule

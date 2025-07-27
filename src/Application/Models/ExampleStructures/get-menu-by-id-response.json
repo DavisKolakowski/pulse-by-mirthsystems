@@ -1,0 +1,101 @@
+{
+  "id": "j0k1l2m3-n4o5-4p6q-7r8s-9t0u1v2w3x4y",
+  "name": "Happy Hour Specials",
+  "description": "Enjoy discounted drinks and appetizers during our daily happy hour.",
+  "venue": {
+    "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "name": "Example Venue",
+    "time_zone_id": "America/Los_Angeles"
+  },
+  "schedules": [
+    {
+      "id": "k1l2m3n4-o5p6-4q7r-8s9t-0u1v2w3x4y5z",
+      "name": "Daily",
+      "start_date": "2025-07-23",
+      "start_time": "16:00:00",
+      "end_time": "19:00:00",
+      "expiration_date": null,
+      "recurrence_pattern": {
+        "name": "Daily",
+        "cron_string": "* 0 16 * * * "
+      },
+      "is_active": true,
+      "status": "running",
+      "created_at": "2025-07-25T08:00:00Z",
+      "updated_at": "2025-07-25T08:00:00Z"
+    },
+    {
+      "id": "l2m3n4o5-p6q7-4r8s-9t0u-1v2w3x4y5z6a",
+      "name": "Weekdays",
+      "start_date": "2025-08-01",
+      "start_time": "17:00:00",
+      "end_time": "20:00:00",
+      "expiration_date": "2025-08-31",
+      "recurrence_pattern": {
+        "name": "Weekdays",
+        "cron_string": " 0 17 * * 1-5 *"
+      },
+      "is_active": true,
+      "status": "scheduled",
+      "created_at": "2025-07-25T08:00:00Z",
+      "updated_at": "2025-07-25T08:00:00Z"
+    }
+  ],
+  "specials": [
+    {
+      "category_id": "m3n4o5p6-q7r8-4s9t-0u1v-2w3x4y5z6a7b",
+      "name": "Drink",
+      "description": "Drink specials, happy hours, and beverage promotions",
+      "icon": "🍺",
+      "sort_order": 2,
+      "items": [
+        {
+          "id": "n4o5p6q7-r8s9-4t0u-1v2w-3x4y5z6a7b8c",
+          "description": "Half-Price Draft Beers - All domestic drafts at 50% off.",
+          "is_active": true,
+          "created_at": "2025-07-23T16:00:00Z",
+          "updated_at": "2025-07-23T16:00:00Z"
+        },
+        {
+          "id": "o5p6q7r8-s9t0-4u1v-2w3x-4y5z6a7b8c9d",
+          "description": "Discounted Cocktails - Signature cocktails for $5 each.",
+          "is_active": true,
+          "created_at": "2025-07-23T16:00:00Z",
+          "updated_at": "2025-07-23T16:00:00Z"
+        }
+      ]
+    },
+    {
+      "category_id": "p6q7r8s9-t0u1-4v2w-3x4y-5z6a7b8c9d0e",
+      "name": "Food",
+      "description": "Food specials, appetizers, and meal deals",
+      "icon": "🍔",
+      "sort_order": 1,
+      "items": [
+        {
+          "id": "q7r8s9t0-u1v2-4w3x-4y5z-6a7b8c9d0e1f",
+          "description": "Half-Price Wings - Buffalo or BBQ wings, 50% off.",
+          "is_active": true,
+          "created_at": "2025-07-23T16:00:00Z",
+          "updated_at": "2025-07-23T16:00:00Z"
+        },
+        {
+          "id": "r8s9t0u1-v2w3-4x4y-5z6a-7b8c9d0e1f2g",
+          "description": "Nachos Special - Loaded nachos for $7.",
+          "is_active": true,
+          "created_at": "2025-07-23T16:00:00Z",
+          "updated_at": "2025-07-23T16:00:00Z"
+        },
+        {
+          "id": "s9t0u1v2-w3x4-4y5z-6a7b-8c9d0e1f2g3h",
+          "description": "Slider Trio - Three mini burgers for $6.",
+          "is_active": true,
+          "created_at": "2025-07-23T16:00:00Z",
+          "updated_at": "2025-07-23T16:00:00Z"
+        }
+      ]
+    }
+  ],
+  "created_at": "2025-07-23T12:00:00Z",
+  "updated_at": "2025-07-23T12:00:00Z"
+}
