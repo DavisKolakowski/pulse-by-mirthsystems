@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Application.Enums;
 
-public enum VenuesSearchSortBySelections
+public enum VenuesSearchSortBySelection
 {
     [EnumMember(Value = "name")]
     Name,

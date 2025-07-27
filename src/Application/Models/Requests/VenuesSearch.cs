@@ -34,7 +34,7 @@ public class VenuesSearch : PageInfo
     /// <example>Active</example>
     [JsonPropertyName("status")]
     [JsonConverter(typeof(JsonStringEnumConverter))]
-    public VenuesSearchStatusSelections Status { get; set; } = VenuesSearchStatusSelections.Active;
+    public VenuesSearchStatusSelection Status { get; set; } = VenuesSearchStatusSelection.Active;
 
     /// <summary>
     /// Sort results by
@@ -42,7 +42,7 @@ public class VenuesSearch : PageInfo
     /// <example>Name</example>
     [JsonPropertyName("sort_by")]
     [JsonConverter(typeof(JsonStringEnumConverter))]
-    public VenuesSearchSortBySelections SortBy { get; set; } = VenuesSearchSortBySelections.Name;
+    public VenuesSearchSortBySelection SortBy { get; set; } = VenuesSearchSortBySelection.Name;
 
     /// <summary>
     /// Sort order direction
@@ -50,5 +50,5 @@ public class VenuesSearch : PageInfo
     /// <example>Ascending</example>
     [JsonPropertyName("sort_order")]
     [JsonConverter(typeof(JsonStringEnumConverter))]
-    public SortOrderSelections SortOrder { get; set; } = SortOrderSelections.Ascending;
+    public SortOrderSelection SortOrder { get; set; } = SortOrderSelection.Ascending;
 }

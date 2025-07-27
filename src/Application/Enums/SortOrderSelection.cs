@@ -7,12 +7,10 @@ using System.Threading.Tasks;
 
 namespace Application.Enums;
 
-public enum VenuesSearchStatusSelections
+public enum SortOrderSelection
 {
-    [EnumMember(Value = "active")]
-    Active,
-    [EnumMember(Value = "all")]
-    All,
-    [EnumMember(Value = "inactive")]
-    Inactive
+    [EnumMember(Value = "ascending")]
+    Ascending,
+    [EnumMember(Value = "descending")]
+    Descending
 }

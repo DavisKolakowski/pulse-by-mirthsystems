@@ -29,6 +29,9 @@ public class SpecialMenuScheduleEntityConfiguration : EntityBaseConfiguration<Sp
             rs.Property(p => p.Name)
               .HasJsonPropertyName("name");
 
+            rs.Property(p => p.Description)
+              .HasJsonPropertyName("description");
+
             rs.OwnsOne(p => p.CronPattern, cp =>
             {
                 cp.Property(c => c.Seconds)

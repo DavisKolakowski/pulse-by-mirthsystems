@@ -17,18 +17,18 @@ public class SpecialMenuScheduleEntity : EntityBase
 
     [Column("start_date")]
     [Required]
-    public LocalDate StartDate { get; set; }
+    public OffsetDate StartDate { get; set; }
 
     [Column("start_time")]
     [Required]
-    public LocalTime StartTime { get; set; }
+    public OffsetTime StartTime { get; set; }
 
     [Column("end_time")]
     [Required]
-    public LocalTime EndTime { get; set; }
+    public OffsetTime EndTime { get; set; }
 
     [Column("expiration_date")]
-    public LocalDate? ExpirationDate { get; set; }
+    public OffsetDate? ExpirationDate { get; set; }
 
     [Column("is_active")]
     public bool IsActive { get; set; } = true;

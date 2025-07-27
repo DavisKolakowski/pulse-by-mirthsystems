@@ -7,10 +7,12 @@ using System.Threading.Tasks;
 
 namespace Application.Enums;
 
-public enum SpecialsSortBySelections
+public enum VenuesSearchStatusSelection
 {
-    [EnumMember(Value = "distance")]
-    Distance,
-    [EnumMember(Value = "item_count")]
-    ItemCount
+    [EnumMember(Value = "active")]
+    Active,
+    [EnumMember(Value = "all")]
+    All,
+    [EnumMember(Value = "inactive")]
+    Inactive
 }

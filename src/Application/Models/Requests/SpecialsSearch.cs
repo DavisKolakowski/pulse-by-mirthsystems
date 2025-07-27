@@ -105,7 +105,7 @@ public class SpecialsSearch : PageInfo
     [JsonPropertyName("sort_by")]
     [JsonPropertyOrder(10)]
     [JsonConverter(typeof(JsonStringEnumConverter))]
-    public SpecialsSortBySelections SortBy { get; set; } = SpecialsSortBySelections.Distance;
+    public SpecialsSortBySelection SortBy { get; set; } = SpecialsSortBySelection.Distance;
 
     /// <summary>
     /// Sort order direction
@@ -114,5 +114,5 @@ public class SpecialsSearch : PageInfo
     [JsonPropertyName("sort_order")]
     [JsonPropertyOrder(11)]
     [JsonConverter(typeof(JsonStringEnumConverter))]
-    public SortOrderSelections SortOrder { get; set; } = SortOrderSelections.Ascending;
+    public SortOrderSelection SortOrder { get; set; } = SortOrderSelection.Ascending;
 }

@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Cronos;
+
 namespace Application.Models.Schedules;
 public class CronPattern
 {

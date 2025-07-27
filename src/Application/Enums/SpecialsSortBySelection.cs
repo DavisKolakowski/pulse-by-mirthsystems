@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace Application.Enums;
 
-public enum SortOrderSelections
+public enum SpecialsSortBySelection
 {
-    [EnumMember(Value = "ascending")]
-    Ascending,
-    [EnumMember(Value = "descending")]
-    Descending
+    [EnumMember(Value = "distance")]
+    Distance,
+    [EnumMember(Value = "item_count")]
+    ItemCount
 }
