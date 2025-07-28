@@ -1,10 +1,10 @@
 ﻿using System.Security.Claims;
 
-using Application.Data;
-using Application.Data.Extensions;
+using Application.Infrastructure.Data;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authorization.Infrastructure;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.API.Authorization.Handlers;
 
@@ -58,10 +58,8 @@ public class VenueAuthorizationHandler : AuthorizationHandler<OperationAuthoriza
             return;
         }
 
-        var user = await _dbContext.Users.GetByNameIdentifierAsync(q =>
-        {
-            q.NameIdentifier = userSub;
-        });
+        var user = await _dbContext.Users.Where(u => u.NameIdentifier == userSub)
+            .FirstOrDefaultAsync();
 
         if (user == null)
         {
@@ -69,11 +67,8 @@ public class VenueAuthorizationHandler : AuthorizationHandler<OperationAuthoriza
             return;
         }
 
-        var userRole = await _dbContext.VenueUserRoles.GetForUserAndVenueAsync(q =>
-        {
-            q.UserId = user.Id;
-            q.VenueId = venueId;
-        });
+        var userRole = await _dbContext.VenueUserRoles
+            .FirstOrDefaultAsync(ur => ur.UserId == user.Id && ur.VenueId == venueId && ur.IsActive);
 
         if (userRole == null || !userRole.IsActive)
         {

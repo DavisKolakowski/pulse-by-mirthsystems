@@ -25,5 +25,5 @@ public class DayOfWeekEntity : EntityBase
     [Column("sort_order")]
     public int SortOrder { get; set; }
 
-    public List<BusinessHoursEntity> BusinessHours { get; set; } = new List<BusinessHoursEntity>();
+    public List<VenueBusinessHoursEntity> VenueBusinessHours { get; set; } = new List<VenueBusinessHoursEntity>();
 }

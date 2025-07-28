@@ -14,6 +14,7 @@
 		<PackageReference Include="Cronos" Version="0.11.0" />
 		<PackageReference Include="EFCore.NamingConventions" Version="9.0.0" />
 		<PackageReference Include="FluentValidation" Version="12.0.0" />
+		<PackageReference Include="Hangfire.PostgreSql" Version="1.20.12" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.7" />
 		<PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.2.0" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.7" />
@@ -32,13 +33,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Data\Extensions\" />
-	  <Folder Include="Data\Queries\" />
+	  <Folder Include="Contracts\Repositories\" />
 	  <Folder Include="Models\Analytics\" />
 	  <Folder Include="Models\BusinessHours\" />
 	  <Folder Include="Models\Location\" />
 	  <Folder Include="Models\Specials\" />
 	  <Folder Include="Models\Venues\" />
+	  <Folder Include="Utilities\" />
 	</ItemGroup>
 
 </Project>

@@ -7,6 +7,7 @@ using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 using Application.Enums;
+using Application.Models.Schedules;
 
 using NodaTime;
 
@@ -27,65 +28,81 @@ public class UpdateSpecialMenuSchedule
     public required Guid Id { get; set; }
 
     /// <summary>
-    /// The updated recurrence pattern for this schedule
+    /// The Id of the special menu to schedule
     /// </summary>
-    /// <example>Weekly</example>
-    [Required(ErrorMessage = "Recurrence option is required")]
-    [JsonPropertyName("recurrence_option")]
+    /// <example>456e7890-e89b-12d3-a456-426614174111</example>
+    [Required(ErrorMessage = "Special menu Id is required")]
+    [JsonPropertyName("special_menu_id")]
     [JsonPropertyOrder(1)]
-    [JsonConverter(typeof(JsonStringEnumConverter))]
-    public required RecurrenceOption RecurrenceOption { get; set; }
+    public required Guid SpecialMenuId { get; set; }
 
     /// <summary>
-    /// The updated start date for this schedule
+    /// The recurrence pattern for this schedule
     /// </summary>
-    /// <example>2025-08-01</example>
+    /// <example>Daily</example>
+    [Required(ErrorMessage = "Recurrence option is required")]
+    [JsonPropertyName("recurrence")]
+    [JsonPropertyOrder(2)]
+    [JsonConverter(typeof(JsonStringEnumConverter))]
+    public required Recurrence Recurrence { get; set; }
+
+    /// <summary>
+    /// The date when this schedule should start
+    /// </summary>
+    /// <example>2025-07-21</example>
     [Required(ErrorMessage = "Start date is required")]
     [JsonPropertyName("start_date")]
-    [JsonPropertyOrder(2)]
-    public required LocalDate StartDate { get; set; }
+    [JsonPropertyOrder(3)]
+    public required OffsetDate StartDate { get; set; }
 
     /// <summary>
-    /// The updated start time of day
+    /// The time of day when the special menu becomes available
     /// </summary>
-    /// <example>12:00:00</example>
+    /// <example>11:30:00+00</example>
     [Required(ErrorMessage = "Start time is required")]
     [JsonPropertyName("start_time")]
-    [JsonPropertyOrder(3)]
-    public required LocalTime StartTime { get; set; }
+    [JsonPropertyOrder(4)]
+    public required OffsetTime StartTime { get; set; }
 
     /// <summary>
-    /// The updated end time of day
+    /// The time of day when the special menu ends
     /// </summary>
-    /// <example>15:00:00</example>
+    /// <example>14:30:00+00</example>
     [Required(ErrorMessage = "End time is required")]
     [JsonPropertyName("end_time")]
-    [JsonPropertyOrder(4)]
-    public required LocalTime EndTime { get; set; }
-
-    /// <summary>
-    /// Optional updated expiration date
-    /// </summary>
-    /// <example>2026-01-31</example>
-    [JsonPropertyName("expiration_date")]
     [JsonPropertyOrder(5)]
-    public LocalDate? ExpirationDate { get; set; }
+    public required OffsetTime EndTime { get; set; }
 
     /// <summary>
-    /// Whether this schedule should be active
+    /// Optional date when this schedule expires and will no longer recur
+    /// </summary>
+    /// <example>2025-12-31</example>
+    [JsonPropertyName("expiration_date")]
+    [JsonPropertyOrder(6)]
+    public OffsetDate? ExpirationDate { get; set; }
+
+    /// <summary>
+    /// Whether this schedule should be active immediately upon creation
     /// </summary>
     /// <example>true</example>
     [JsonPropertyName("is_active")]
-    [JsonPropertyOrder(6)]
+    [JsonPropertyOrder(7)]
     public bool IsActive { get; set; } = true;
 
     /// <summary>
-    /// Custom cron expression (required only when RecurrenceOption is Custom)
+    /// Optional description for the schedule (e.g. "Weekly on Tuesdays 11:30 AM - 2:00 PM")
+    /// </summary>
+    /// <example>Weekly on Tuesdays 11:30 AM - 2:00 PM</example>
+    [JsonPropertyName("description")]
+    [JsonPropertyOrder(8)]
+    public string? Description { get; set; }
+
+    /// <summary>
+    /// Custom cron expression (required only when Recurrence is Custom)
     /// Format: "seconds minutes hours dayOfMonth month dayOfWeek year"
     /// </summary>
     /// <example>0 0 12 ? * MON-FRI *</example>
     [JsonPropertyName("custom_cron")]
-    [JsonPropertyOrder(7)]
-    [RegularExpression(@"^(\S+\s+){6}\S+$", ErrorMessage = "Custom cron must have 7 space-separated values")]
-    public string? CustomCron { get; set; }
+    [JsonPropertyOrder(9)]
+    public CronPattern? CustomCron { get; set; }
 }

@@ -17,29 +17,36 @@ public class SpecialMenuScheduleEntity : EntityBase
 
     [Column("start_date")]
     [Required]
-    public OffsetDate StartDate { get; set; }
+    public LocalDate StartDate { get; set; }
 
     [Column("start_time")]
     [Required]
-    public OffsetTime StartTime { get; set; }
+    public LocalTime StartTime { get; set; }
 
     [Column("end_time")]
     [Required]
-    public OffsetTime EndTime { get; set; }
+    public LocalTime EndTime { get; set; }
 
     [Column("expiration_date")]
-    public OffsetDate? ExpirationDate { get; set; }
+    public LocalDate? ExpirationDate { get; set; }
 
     [Column("is_active")]
     public bool IsActive { get; set; } = true;
 
-    [Column("recurrence_settings", TypeName = "jsonb")]
+    [Column("recurrence")]
     [Required]
-    public RecurrenceSettings RecurrenceSettings { get; set; } = null!;
+    public Recurrence Recurrence { get; set; }
+
+    [Column("description")]
+    [Required]
+    public string Description { get; set; } = null!;
+
+    [Column("cron_pattern", TypeName = "jsonb")]
+    public CronPattern CronPattern { get; set; } = null!;
 
     [Column("status")]
     [Required]
-    public SpecialMenuScheduleStatus Status { get; set; } = SpecialMenuScheduleStatus.Scheduled;
+    public SpecialMenuScheduleStatus Status { get; set; }
 
     public SpecialMenuEntity SpecialMenu { get; set; } = null!;
 }

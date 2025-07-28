@@ -7,6 +7,7 @@ using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 using Application.Enums;
+using Application.Models.Schedules;
 
 using NodaTime;
 
@@ -31,9 +32,10 @@ public class CreateSpecialMenuSchedule
     /// </summary>
     /// <example>Daily</example>
     [Required(ErrorMessage = "Recurrence option is required")]
-    [JsonPropertyName("recurrence_option")]
+    [JsonPropertyName("recurrence")]
     [JsonPropertyOrder(2)]
-    public required string RecurrenceOption { get; set; }
+    [JsonConverter(typeof(JsonStringEnumConverter))]
+    public required Recurrence Recurrence { get; set; }
 
     /// <summary>
     /// The date when this schedule should start
@@ -42,25 +44,25 @@ public class CreateSpecialMenuSchedule
     [Required(ErrorMessage = "Start date is required")]
     [JsonPropertyName("start_date")]
     [JsonPropertyOrder(3)]
-    public required LocalDate StartDate { get; set; }
+    public required OffsetDate StartDate { get; set; }
 
     /// <summary>
     /// The time of day when the special menu becomes available
     /// </summary>
-    /// <example>11:30:00</example>
+    /// <example>11:30:00+00</example>
     [Required(ErrorMessage = "Start time is required")]
     [JsonPropertyName("start_time")]
     [JsonPropertyOrder(4)]
-    public required LocalTime StartTime { get; set; }
+    public required OffsetTime StartTime { get; set; }
 
     /// <summary>
     /// The time of day when the special menu ends
     /// </summary>
-    /// <example>14:30:00</example>
+    /// <example>14:30:00+00</example>
     [Required(ErrorMessage = "End time is required")]
     [JsonPropertyName("end_time")]
     [JsonPropertyOrder(5)]
-    public required LocalTime EndTime { get; set; }
+    public required OffsetTime EndTime { get; set; }
 
     /// <summary>
     /// Optional date when this schedule expires and will no longer recur
@@ -68,7 +70,7 @@ public class CreateSpecialMenuSchedule
     /// <example>2025-12-31</example>
     [JsonPropertyName("expiration_date")]
     [JsonPropertyOrder(6)]
-    public LocalDate? ExpirationDate { get; set; }
+    public OffsetDate? ExpirationDate { get; set; }
 
     /// <summary>
     /// Whether this schedule should be active immediately upon creation
@@ -79,12 +81,19 @@ public class CreateSpecialMenuSchedule
     public bool IsActive { get; set; } = true;
 
     /// <summary>
-    /// Custom cron expression (required only when RecurrenceOption is Custom)
+    /// Optional description for the schedule (e.g. "Weekly on Tuesdays 11:30 AM - 2:00 PM")
+    /// </summary>
+    /// <example>Weekly on Tuesdays 11:30 AM - 2:00 PM</example>
+    [JsonPropertyName("description")]
+    [JsonPropertyOrder(8)]
+    public string? Description { get; set; }
+
+    /// <summary>
+    /// Custom cron expression (required only when Recurrence is Custom)
     /// Format: "seconds minutes hours dayOfMonth month dayOfWeek year"
     /// </summary>
     /// <example>0 0 12 ? * MON-FRI *</example>
     [JsonPropertyName("custom_cron")]
-    [JsonPropertyOrder(8)]
-    [RegularExpression(@"^(\S+\s+){6}\S+$", ErrorMessage = "Custom cron must have 7 space-separated values")]
-    public string? CustomCron { get; set; }
+    [JsonPropertyOrder(9)]
+    public CronPattern? CustomCron { get; set; }
 }

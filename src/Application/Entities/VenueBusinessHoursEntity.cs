@@ -5,8 +5,8 @@ using NodaTime;
 
 namespace Application.Entities;
 
-[Table("business_hours")]
-public class BusinessHoursEntity : EntityBase
+[Table("venue_business_hours")]
+public class VenueBusinessHoursEntity : EntityBase
 {
     [Column("venue_id")]
     public Guid VenueId { get; set; }

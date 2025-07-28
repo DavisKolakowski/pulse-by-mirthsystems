@@ -1,5 +1,5 @@
-using Application.Data;
 using Application.Extensions;
+using Application.Infrastructure.Data;
 using Application.Services.DatabaseInitializer.Extensions;
 using Application.Services.DatabaseInitializer.Options;
 

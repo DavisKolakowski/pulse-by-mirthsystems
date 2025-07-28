@@ -14,7 +14,7 @@ using Azure.Maps.Search;
 using Azure.Maps.Search.Models;
 using Azure.Maps.TimeZones;
 
-namespace Application.Services;
+namespace Application.Infrastructure.Services;
 
 
 public class AzureMapsService : IAzureMapsService

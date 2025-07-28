@@ -31,10 +31,23 @@ public class CronPattern
     [RegularExpression(@"^(\*|\?|([1-2]\d{3})(,[1-2]\d{3})*|([1-2]\d{3})-([1-2]\d{3})(/[1-9]+)?|[1-2]\d{3}/[1-9]+)$")]
     public string Year { get; set; } = "*";
 
-    public override string ToString() => string.Join(" ", Seconds, Minutes, Hours, DayOfMonth, Month, DayOfWeek, Year).Trim();
+    public override string ToString() => ToCronExpression().ToString();
 
     public CronExpression ToCronExpression()
     {
-        return CronExpression.Parse(ToString(), CronFormat.IncludeSeconds);
+        return CronExpression.Parse(string.Join(" ", Seconds, Minutes, Hours, DayOfMonth, Month, DayOfWeek, Year).Trim(), CronFormat.IncludeSeconds);
+    }
+
+    public bool IsValid()
+    {
+        try
+        {
+            ToCronExpression();
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
     }
 }

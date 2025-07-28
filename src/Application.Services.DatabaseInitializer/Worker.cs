@@ -1,6 +1,6 @@
 using System.Diagnostics;
 
-using Application.Data;
+using Application.Infrastructure.Data;
 using Application.Services.DatabaseInitializer.Options;
 
 using Microsoft.EntityFrameworkCore;
