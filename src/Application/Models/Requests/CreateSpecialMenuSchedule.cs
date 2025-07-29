@@ -44,7 +44,7 @@ public class CreateSpecialMenuSchedule
     [Required(ErrorMessage = "Start date is required")]
     [JsonPropertyName("start_date")]
     [JsonPropertyOrder(3)]
-    public required OffsetDate StartDate { get; set; }
+    public required LocalDate StartDate { get; set; }
 
     /// <summary>
     /// The time of day when the special menu becomes available
@@ -53,7 +53,7 @@ public class CreateSpecialMenuSchedule
     [Required(ErrorMessage = "Start time is required")]
     [JsonPropertyName("start_time")]
     [JsonPropertyOrder(4)]
-    public required OffsetTime StartTime { get; set; }
+    public required LocalTime StartTime { get; set; }
 
     /// <summary>
     /// The time of day when the special menu ends
@@ -62,7 +62,7 @@ public class CreateSpecialMenuSchedule
     [Required(ErrorMessage = "End time is required")]
     [JsonPropertyName("end_time")]
     [JsonPropertyOrder(5)]
-    public required OffsetTime EndTime { get; set; }
+    public required LocalTime EndTime { get; set; }
 
     /// <summary>
     /// Optional date when this schedule expires and will no longer recur
@@ -70,7 +70,7 @@ public class CreateSpecialMenuSchedule
     /// <example>2025-12-31</example>
     [JsonPropertyName("expiration_date")]
     [JsonPropertyOrder(6)]
-    public OffsetDate? ExpirationDate { get; set; }
+    public LocalDate? ExpirationDate { get; set; }
 
     /// <summary>
     /// Whether this schedule should be active immediately upon creation

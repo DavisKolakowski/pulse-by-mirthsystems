@@ -90,4 +90,14 @@ public static class CronPatternGenerator
             Month = startDate.Month.ToString()
         };
     }
+
+    public static CronPattern Custom(CronPattern customCron)
+    {
+        if (!customCron.IsValid())
+        {
+            throw new ValidationException("Invalid cron pattern provided.");
+        }
+
+        return customCron;
+    }
 }
