@@ -32,12 +32,12 @@ public class SpecialMenuScheduler
     public SpecialMenuScheduler(
         ApplicationDbContext dbContext,
         IClock clock,
-        IRecurringJobManager hangfireManager,
+        IRecurringJobManager jobManager,
         ILogger<SpecialMenuScheduler> logger)
     {
         _dbContext = dbContext;
         _clock = clock;
-        _jobManager = hangfireManager;
+        _jobManager = jobManager;
         _logger = logger;
     }
 
