@@ -39,6 +39,16 @@ public class SpecialMenuScheduler
         _clock = clock;
         _jobManager = jobManager;
         _logger = logger;
+        Initialize();
+    }
+
+    private void Initialize()
+    {
+        var schedules = _dbContext.SpecialMenuSchedules.ToList();
+        schedules.ForEach(schedule =>
+        {
+            Schedule(schedule);
+        });
     }
 
     public async Task AddOrUpdate(SpecialMenuScheduleEntity schedule)
@@ -77,8 +87,7 @@ public class SpecialMenuScheduler
 
     private void Schedule(SpecialMenuScheduleEntity schedule)
     {
-        if (!schedule.IsActive ||
-            schedule.Status == SpecialMenuScheduleStatus.Expired ||
+        if (schedule.Status == SpecialMenuScheduleStatus.Expired ||
             schedule.Status == SpecialMenuScheduleStatus.Disabled)
         {
             Delete(schedule.Id);
@@ -134,7 +143,11 @@ public class SpecialMenuScheduler
 
         if (timeZone == null)
         {
-            _logger.LogError("Invalid venue time zone: {TimeZoneId} for SpecialMenuId: {SpecialMenuId}", timeZoneId, schedule.SpecialMenuId);
+            _logger.LogError(
+                    "Invalid venue time zone: {TimeZoneId} for SpecialMenuId: {SpecialMenuId}", 
+                    timeZoneId, 
+                    schedule.SpecialMenuId
+                );
             schedule.Status = SpecialMenuScheduleStatus.Disabled;
             return;
         }
@@ -166,9 +179,9 @@ public class SpecialMenuScheduler
     private string GetTimeZoneId(SpecialMenuScheduleEntity schedule)
     {
         return _dbContext.SpecialMenus
-            .Where(m => m.Id == schedule.SpecialMenuId)
-            .Select(m => m.Venue.TimeZoneId)
-            .Single();
+            .Include(m => m.Venue)
+            .Single(m => m.Id == schedule.SpecialMenuId)
+            .Venue.TimeZoneId;
     }
 
     private Duration CalculateScheduleDuration(SpecialMenuScheduleEntity schedule)
