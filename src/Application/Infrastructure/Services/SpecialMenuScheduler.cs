@@ -22,7 +22,6 @@ public class SpecialMenuScheduler : ISpecialMenuScheduler
 {
     private readonly ApplicationDbContext _dbContext;
     private readonly IClock _clock;
-    private readonly IRecurringJobManager _jobManager;
     private readonly ILogger<SpecialMenuScheduler> _logger;
     private static string GetJobId(Guid scheduleId)
     {
@@ -32,12 +31,10 @@ public class SpecialMenuScheduler : ISpecialMenuScheduler
     public SpecialMenuScheduler(
         ApplicationDbContext dbContext,
         IClock clock,
-        IRecurringJobManager jobManager,
         ILogger<SpecialMenuScheduler> logger)
     {
         _dbContext = dbContext;
         _clock = clock;
-        _jobManager = jobManager;
         _logger = logger;
         Initialize();
     }
@@ -97,7 +94,7 @@ public class SpecialMenuScheduler : ISpecialMenuScheduler
         var cron = schedule.CronPattern.ToString();
         var jobId = GetJobId(schedule.Id);
 
-        _jobManager.AddOrUpdate(
+        RecurringJob.AddOrUpdate(
             jobId,
             () => Start(schedule.Id),
             cron,
@@ -111,7 +108,10 @@ public class SpecialMenuScheduler : ISpecialMenuScheduler
     private async Task Start(Guid scheduleId)
     {
         var schedule = await _dbContext.SpecialMenuSchedules.FindAsync(scheduleId);
-        if (schedule == null) return;
+        if (schedule == null)
+        {
+            return;
+        }
 
         schedule.Status = SpecialMenuScheduleStatus.Running;
         await _dbContext.SaveChangesAsync();
@@ -200,6 +200,6 @@ public class SpecialMenuScheduler : ISpecialMenuScheduler
     private void Delete(Guid scheduleId)
     {
         var jobId = GetJobId(scheduleId);
-        _jobManager.RemoveIfExists(jobId);
+        RecurringJob.RemoveIfExists(jobId);
     }
 }
