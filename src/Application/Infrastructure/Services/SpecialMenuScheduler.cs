@@ -18,7 +18,7 @@ using NodaTime;
 
 namespace Application.Infrastructure.Services;
 
-public class SpecialMenuScheduler
+public class SpecialMenuScheduler : ISpecialMenuScheduler
 {
     private readonly ApplicationDbContext _dbContext;
     private readonly IClock _clock;

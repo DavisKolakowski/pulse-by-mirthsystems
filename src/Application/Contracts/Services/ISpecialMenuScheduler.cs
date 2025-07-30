@@ -13,11 +13,6 @@ namespace Application.Contracts.Services;
 
 public interface ISpecialMenuScheduler
 {
-    void Schedule(SpecialMenuScheduleEntity schedule);
-    void Update(SpecialMenuScheduleEntity schedule);
-    void Run(Guid scheduleId);
-    void Expire(Guid scheduleId);
-    void Disable(Guid scheduleId);
-    void Enable(Guid scheduleId);   
-    void Delete(Guid scheduleId);
+    Task AddOrUpdate(SpecialMenuScheduleEntity schedule);
+    Task Remove(Guid scheduleId);
 }
