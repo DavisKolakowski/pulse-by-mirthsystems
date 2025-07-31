@@ -71,9 +71,9 @@ public class DbSetup
             int specialAdded = 0;
             foreach (var entity in dataOptions.SpecialCategories)
             {
-                if (!await dbContext.SpecialCategories.AnyAsync(s => s.Name == entity.Name, cancellationToken))
+                if (!await dbContext.SpecialMenuItemGroups.AnyAsync(s => s.Name == entity.Name, cancellationToken))
                 {
-                    dbContext.SpecialCategories.Add(new SpecialCategoryEntity
+                    dbContext.SpecialMenuItemGroups.Add(new SpecialCategoryEntity
                     {
                         Name = entity.Name,
                         Description = entity.Description,

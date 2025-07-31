@@ -146,7 +146,7 @@ public class SpecialMenuScheduler : ISpecialMenuScheduler
             _logger.LogError(
                     "Invalid venue time zone: {TimeZoneId} for SpecialMenuId: {SpecialMenuId}", 
                     timeZoneId, 
-                    schedule.SpecialMenuId
+                    schedule.MenuId
                 );
             schedule.Status = SpecialMenuScheduleStatus.Disabled;
             return;
@@ -180,7 +180,7 @@ public class SpecialMenuScheduler : ISpecialMenuScheduler
     {
         return _dbContext.SpecialMenus
             .Include(m => m.Venue)
-            .Single(m => m.Id == schedule.SpecialMenuId)
+            .Single(m => m.Id == schedule.MenuId)
             .Venue.TimeZoneId;
     }
 

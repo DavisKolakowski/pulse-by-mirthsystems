@@ -20,5 +20,5 @@ public class SpecialMenuEntity : EntityBase
 
     public VenueEntity Venue { get; set; } = null!;
     public List<SpecialMenuScheduleEntity> Schedules { get; set; } = new List<SpecialMenuScheduleEntity>();
-    public List<SpecialEntity> Specials { get; set; } = new List<SpecialEntity>();
+    public List<SpecialMenuItemEntity> Items { get; set; } = new List<SpecialMenuItemEntity>();
 }

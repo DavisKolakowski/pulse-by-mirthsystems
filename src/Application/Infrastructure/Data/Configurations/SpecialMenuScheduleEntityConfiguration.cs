@@ -10,16 +10,16 @@ public class SpecialMenuScheduleEntityConfiguration : EntityBaseConfiguration<Sp
     {
         base.Configure(builder);
 
-        builder.HasIndex(sms => sms.SpecialMenuId)
+        builder.HasIndex(sms => sms.MenuId)
                .HasDatabaseName("ix_special_menu_schedules_menu_id");
         builder.HasIndex(sms => sms.IsActive)
                .HasDatabaseName("ix_special_menu_schedules_is_active");
-        builder.HasIndex(sms => new { sms.SpecialMenuId, sms.IsActive })
+        builder.HasIndex(sms => new { sms.MenuId, sms.IsActive })
                .HasDatabaseName("ix_special_menu_schedules_menu_active");
 
-        builder.HasOne(sms => sms.SpecialMenu)
+        builder.HasOne(sms => sms.Menu)
                .WithMany(sm => sm.Schedules)
-               .HasForeignKey(sms => sms.SpecialMenuId)
+               .HasForeignKey(sms => sms.MenuId)
                .OnDelete(DeleteBehavior.Cascade);
 
         builder.OwnsOne(sms => sms.CronPattern, cp =>

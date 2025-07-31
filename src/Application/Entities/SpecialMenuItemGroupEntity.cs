@@ -3,8 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Application.Entities;
 
-[Table("special_categories")]
-public class SpecialCategoryEntity : EntityBase
+[Table("special_menu_item_groups")]
+public class SpecialMenuItemGroupEntity : EntityBase
 {
     [Column("name")]
     [Required]
@@ -22,6 +22,6 @@ public class SpecialCategoryEntity : EntityBase
     [Column("sort_order")]
     public int SortOrder { get; set; }
 
-    public List<SpecialEntity> Specials { get; set; } = new List<SpecialEntity>();
+    public List<SpecialMenuItemEntity> Items { get; set; } = new List<SpecialMenuItemEntity>();
 }
 

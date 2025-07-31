@@ -19,7 +19,7 @@ public class VenueBusinessHoursEntityConfiguration : EntityBaseConfiguration<Ven
                .HasForeignKey(bh => bh.VenueId)
                .OnDelete(DeleteBehavior.Cascade);
         builder.HasOne(bh => bh.DayOfWeek)
-               .WithMany(dow => dow.VenueBusinessHours)
+               .WithMany(dow => dow.BusinessHours)
                .HasForeignKey(bh => bh.DayOfWeekId)
                .OnDelete(DeleteBehavior.Restrict);
     }

@@ -17,9 +17,9 @@ public static class SeedMapper
         }).ToList();
     }
 
-    public static List<SpecialCategoryEntity> MapSpecialCategories(List<SpecialCategorySeed> seeds)
+    public static List<SpecialMenuItemGroupEntity> MapSpecialCategories(List<SpecialCategorySeed> seeds)
     {
-        return seeds.Select(seed => new SpecialCategoryEntity
+        return seeds.Select(seed => new SpecialMenuItemGroupEntity
         {
             Name = seed.Name,
             Description = seed.Description,

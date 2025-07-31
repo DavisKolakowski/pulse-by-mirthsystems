@@ -3,11 +3,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Application.Entities;
 
-[Table("specials")]
-public class SpecialEntity : EntityBase
+[Table("special_menu_items")]
+public class SpecialMenuItemEntity : EntityBase
 {
-    [Column("special_category_id")]
-    public Guid SpecialCategoryId { get; set; }
+    [Column("group_id")]
+    public Guid GroupId { get; set; }
 
     [Column("description")]
     [Required]
@@ -17,9 +17,9 @@ public class SpecialEntity : EntityBase
     [Column("is_active")]
     public bool IsActive { get; set; } = true;
 
-    [Column("special_menu_id")]
-    public Guid SpecialMenuId { get; set; }
+    [Column("menu_id")]
+    public Guid MenuId { get; set; }
 
-    public SpecialCategoryEntity Category { get; set; } = null!;
-    public SpecialMenuEntity? SpecialMenu { get; set; }
+    public SpecialMenuItemGroupEntity Group { get; set; } = null!;
+    public SpecialMenuEntity? Menu { get; set; }
 }

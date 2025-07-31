@@ -22,8 +22,8 @@ public sealed class ApplicationDbContext : DbContext
     public DbSet<DayOfWeekEntity> DaysOfWeek => Set<DayOfWeekEntity>();
 
     // Special entities
-    public DbSet<SpecialEntity> Specials => Set<SpecialEntity>();
-    public DbSet<SpecialCategoryEntity> SpecialCategories => Set<SpecialCategoryEntity>();
+    public DbSet<SpecialMenuItemEntity> SpecialMenuItems => Set<SpecialMenuItemEntity>();
+    public DbSet<SpecialMenuItemGroupEntity> SpecialMenuItemGroups => Set<SpecialMenuItemGroupEntity>();
     public DbSet<SpecialMenuEntity> SpecialMenus => Set<SpecialMenuEntity>();
     public DbSet<SpecialMenuScheduleEntity> SpecialMenuSchedules => Set<SpecialMenuScheduleEntity>();
 

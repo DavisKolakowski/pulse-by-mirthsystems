@@ -11,9 +11,9 @@ namespace Application.Entities;
 [Table("special_menu_schedules")]
 public class SpecialMenuScheduleEntity : EntityBase
 {
-    [Column("special_menu_id")]
+    [Column("menu_id")]
     [Required]
-    public Guid SpecialMenuId { get; set; }
+    public Guid MenuId { get; set; }
 
     [Column("start_date")]
     [Required]
@@ -48,5 +48,5 @@ public class SpecialMenuScheduleEntity : EntityBase
     [Required]
     public SpecialMenuScheduleStatus Status { get; set; }
 
-    public SpecialMenuEntity SpecialMenu { get; set; } = null!;
+    public SpecialMenuEntity Menu { get; set; } = null!;
 }
