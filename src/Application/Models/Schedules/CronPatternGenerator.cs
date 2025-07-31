@@ -93,11 +93,15 @@ public static class CronPatternGenerator
 
     public static CronPattern Custom(CronPattern customCron)
     {
-        if (!customCron.IsValid())
+        return new CronPattern
         {
-            throw new ValidationException("Invalid cron pattern provided.");
-        }
-
-        return customCron;
+            Seconds = customCron.Seconds,
+            Minutes = customCron.Minutes,
+            Hours = customCron.Hours,
+            DayOfMonth = customCron.DayOfMonth,
+            Month = customCron.Month,
+            DayOfWeek = customCron.DayOfWeek,
+            Year = customCron.Year
+        };
     }
 }

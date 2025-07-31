@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 
-using Application.Domain.Entities;
+using Application.Entities;
 using Application.Infrastructure.Data;
 using Application.Services.DatabaseInitializer.Options;
 
@@ -73,7 +73,7 @@ public class DbSetup
             {
                 if (!await dbContext.SpecialMenuItemGroups.AnyAsync(s => s.Name == entity.Name, cancellationToken))
                 {
-                    dbContext.SpecialMenuItemGroups.Add(new SpecialCategoryEntity
+                    dbContext.SpecialMenuItemGroups.Add(new SpecialMenuItemGroupEntity
                     {
                         Name = entity.Name,
                         Description = entity.Description,

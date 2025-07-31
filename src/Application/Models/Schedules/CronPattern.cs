@@ -10,6 +10,11 @@ using Cronos;
 namespace Application.Models.Schedules;
 public class CronPattern
 {
+    public CronPattern() 
+    {
+        Validate();
+    }
+
     [RegularExpression(@"^(\*|\?|([0-5]?\d)(,[0-5]?\d)*|([0-5]?\d)-([0-5]?\d)(/[1-5]?\d)?|[0-5]?\d/[1-5]?\d)$")]
     public string Seconds { get; set; } = "*";
 
@@ -38,16 +43,15 @@ public class CronPattern
         return CronExpression.Parse(string.Join(" ", Seconds, Minutes, Hours, DayOfMonth, Month, DayOfWeek, Year).Trim(), CronFormat.IncludeSeconds);
     }
 
-    public bool IsValid()
+    private void Validate()
     {
         try
         {
             ToCronExpression();
-            return true;
         }
-        catch
+        catch (CronFormatException ex)
         {
-            return false;
+            throw new ArgumentException("Invalid cron pattern", nameof(CronPattern), ex);
         }
     }
 }
