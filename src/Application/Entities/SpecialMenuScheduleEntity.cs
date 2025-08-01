@@ -11,6 +11,11 @@ namespace Application.Entities;
 [Table("special_menu_schedules")]
 public class SpecialMenuScheduleEntity : EntityBase
 {
+    public SpecialMenuScheduleEntity()
+    {
+        TimeSpan = Period.Between(StartTime, EndTime, PeriodUnits.Hours | PeriodUnits.Minutes).ToDuration();
+    }
+
     [Column("menu_id")]
     [Required]
     public Guid MenuId { get; set; }
@@ -30,6 +35,9 @@ public class SpecialMenuScheduleEntity : EntityBase
     [Column("expiration_date")]
     public LocalDate? ExpirationDate { get; set; }
 
+    [Column("time_span", TypeName = "interval")]
+    public Duration TimeSpan { get; private set; }
+
     [Column("is_active")]
     public bool IsActive { get; set; } = true;
 
@@ -43,10 +51,6 @@ public class SpecialMenuScheduleEntity : EntityBase
 
     [Column("cron_pattern", TypeName = "jsonb")]
     public CronPattern CronPattern { get; set; } = null!;
-
-    [Column("status")]
-    [Required]
-    public SpecialMenuScheduleStatus Status { get; set; }
 
     public SpecialMenuEntity Menu { get; set; } = null!;
 }

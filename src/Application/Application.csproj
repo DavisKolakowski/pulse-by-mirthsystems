@@ -40,7 +40,6 @@
 	  <Folder Include="Models\Location\" />
 	  <Folder Include="Models\Specials\" />
 	  <Folder Include="Models\Venues\" />
-	  <Folder Include="Utilities\" />
 	</ItemGroup>
 
 </Project>

@@ -37,7 +37,6 @@ public sealed class ApplicationDbContext : DbContext
     {
         base.OnModelCreating(builder);
 
-        builder.HasPostgresEnum<SpecialMenuScheduleStatus>();
         builder.HasPostgresEnum<Recurrence>();
 
         builder.HasPostgresExtension("address_standardizer");

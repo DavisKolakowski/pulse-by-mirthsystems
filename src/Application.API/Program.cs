@@ -48,8 +48,6 @@ public class Program
             });
         });
 
-        builder.Services.AddScoped<ISpecialMenuScheduler, SpecialMenuScheduler>();
-
         builder.Services.AddControllers();
         // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
         builder.Services.AddOpenApi();
