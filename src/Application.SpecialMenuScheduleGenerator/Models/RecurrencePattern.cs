@@ -1,34 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Application.SpecialMenuScheduleGenerator.Contracts;
 using Application.SpecialMenuScheduleGenerator.Enums;
 
 using NodaTime;
+using NodaTime.Text;
 
 namespace Application.SpecialMenuScheduleGenerator.Models;
-
-public class RecurrencePattern
+public abstract class RecurrencePattern : IRecurrencePattern
 {
-    public RecurrencePatternType Type { get; set; }
-    public int Interval { get; set; }
+    public abstract RecurrencePatternType Type { get; }
+    public int Interval { get; protected set; } = 1;
+    protected LocalDate StartDate { get; }
 
-    // For weekly patterns - using NodaTime's IsoDayOfWeek
-    public List<IsoDayOfWeek>? DaysOfWeek { get; set; }
-    public IsoDayOfWeek? FirstDayOfWeek { get; set; }
+    protected RecurrencePattern(LocalDate startDate, int interval = 1)
+    {
+        StartDate = startDate;
+        Interval = interval;
+    }
 
-    // For monthly/yearly patterns
-    public int? DayOfMonth { get; set; }
-
-    // For relative patterns
-    public WeekIndex? Index { get; set; }
-
-    // For yearly patterns
-    public int? Month { get; set; }
-
-    // Additional properties for our use
-    public LocalDate StartDate { get; set; }
-    public LocalDate? EndDate { get; set; }
+    public abstract IEnumerable<LocalDate> GenerateDates(LocalDate? until = null);
+    public abstract string GetDescription();
 }
